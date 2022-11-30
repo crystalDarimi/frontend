@@ -21,7 +21,9 @@ export default function Calendar() {
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
+
     const [addedevent, setAddedevent] = useState({
+        id: "",
         lectureTitle: "",
         start: "",
         end: ""
@@ -82,22 +84,23 @@ export default function Calendar() {
     //     calendarApi.remove();
 
     // }
-    function handleEventAdd(added){
-        onEventAdded(added);
-        addEventData(added);
-    }
-    function addEventData(added){
-        setAddedevent(added);
-        const thisEvents = state.eventlist;
-        added.id = "ID-" + thisEvents.length; // key를 위한 id추가
-        thisEvents.push(added); // 배열에 아이템 추가
-        setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
-        console.log("events : ", state.eventlist);
-        console.log(added)
+    function addEventData(){
+        // const thisEvents = state.eventlist;
+        // added.id = "ID-" + thisEvents.length; // key를 위한 id추가
+        // thisEvents.push(added); // 배열에 아이템 추가
+        // setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
+        // console.log("events : ", state.eventlist);
+        // console.log(added)
         call("/eple/v1/calendar/schedule", "POST", added)
         
     }
     
+    function handleDataName(event){
+        addedevent.lectureTitle = event.title;
+        addedevent.start = event.start.toISOString();
+        addedevent.end = event.end.toISOString();
+        console.log(addedevent);
+    }
     
     const [hoverBtn, setHover] = useState(false);
     // function getEvent(id){
@@ -135,7 +138,7 @@ export default function Calendar() {
                     dayHeaderFormat={{
                         weekday: 'long'
                     }}
-                
+                    eventAdd = {}
                     // event = {{
                     //     onEventAdded
                     // }}
@@ -209,7 +212,7 @@ export default function Calendar() {
             isLecture = {isLecture} 
             isOpen = {modalOpen} 
             onClose = {()=> setModalOpen(false)} 
-            onEventAdded={(added) => handleEventAdd(added)}
+            onEventAdded={(added) => {onEventAdded(added); handleDataName(added)}}
             
             />
 

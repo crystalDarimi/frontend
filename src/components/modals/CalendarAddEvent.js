@@ -8,7 +8,7 @@ import Modal from 'react-modal';
 import {TextField}  from "@mui/material";
 
 
-export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded, changeName}/* { isOpen, onClose, onEventAdded } */) {
+export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded}/* { isOpen, onClose, onEventAdded } */) {
     const [title, setTitle] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
@@ -19,6 +19,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
         end: ""
     })
 
+
     const onSubmit = (event) => {
         event.preventDefault();
         onEventAdded({
@@ -26,12 +27,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
             start,
             end
         })
-        onClose();
-        // changeName({
-        //     lectureTitle: {title},
-        //     start: {start.toIS}
-
-        // })
+        onClose();        
     }
     //if문으로 일정 과외 나누기
 
@@ -75,7 +71,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
 
                         <div>
                             <label className="text eventStart">과외 시작</label>
-                            <DatePicker className="UserInput inputStart start" showTimeSelect timeIntervals={15} timeCaption="Time" name = "start"selected={start} dateFormat="MM/dd/yyyy h:mm aa" onChange={(start) => {setStart(start).format("YYYY-MM-DDTHH:mm:sszz"); setEnd(null).format("YYYY-MM-DDTHH:mm:sszz")}} />
+                            <DatePicker className="UserInput inputStart start" showTimeSelect timeIntervals={15} timeCaption="Time" name = "start"selected={start} dateFormat="MM/dd/yyyy h:mm aa" onChange={(start) => {setStart(start); setEnd(null)}} />
                         </div>
 
                         <div>
