@@ -7,23 +7,35 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import '../../node_modules/@fullcalendar/common/main.css';
 //import listPlugin from '@fullcalendar/list';
 import AddIcon from '@mui/icons-material/Add';
-//import axios from 'axios';
+import axios from 'axios';
 import CalendarAddEvent from '../components/modals/CalendarAddEvent'
 import '../styles/CalendarAddEvent.css'
 import listPlugin from '@fullcalendar/list';
-import {call,signout} from "../service/ApiService";
+import {call,signout} from "../service/ApiService.js";
+import moment from 'moment';
+import {API_BASE_URL}  from "../api-config.js";
 
-
+const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 
 export default function Calendar() {
+    let headers = new Headers({
+        "Content-Type": "application/json",
+    });
+
+    //로컬 스토리지에서 ACESS TOKEN 가져오기
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    if(accessToken && accessToken !== null){
+        headers.append("Authorization","Bearer "+accessToken);
+    }
+
     const [state, setState] = useState({ eventlist: []});
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
 
     const [addedevent, setAddedevent] = useState({
-        id: "",
+        //id: "",
         lectureTitle: "",
         start: "",
         end: ""
@@ -84,22 +96,33 @@ export default function Calendar() {
     //     calendarApi.remove();
 
     // }
-    function addEventData(){
-        // const thisEvents = state.eventlist;
-        // added.id = "ID-" + thisEvents.length; // key를 위한 id추가
-        // thisEvents.push(added); // 배열에 아이템 추가
+    async function addEventData(){
+        const thisEvents = state.eventlist;
+        thisEvents.push(addedevent); // 배열에 아이템 추가
         // setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
         // console.log("events : ", state.eventlist);
         // console.log(added)
-        call("/eple/v1/calendar/schedule", "POST", added)
+        fetch(API_BASE_URL+"/eple/v1/calendar/schedule",{
+            headers: headers,
+            method: "POST",
+            body: addedevent,
+        }
         
+        ).then((response) =>
+        setState({ eventlist: response.data })
+    );
+    console.log("handleDataName : " ,addedevent);
+        console.log("eventlist : ", state.eventlist)
+        //await axios.post("http://prod-eple-crystal-api-service.ap-northeast-2.elasticbeanstalk.com/eple/v1/calendar/schedule", addedevent)
     }
     
     function handleDataName(event){
-        addedevent.lectureTitle = event.title;
-        addedevent.start = event.start.toISOString();
-        addedevent.end = event.end.toISOString();
-        console.log(addedevent);
+        addedevent.lectureTitle = JSON.stringify(event.title);
+        addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
+        addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
+        //addedevent.id = "ID-" + thisEvents.length;
+        
+        return addedevent;
     }
     
     const [hoverBtn, setHover] = useState(false);
@@ -138,7 +161,7 @@ export default function Calendar() {
                     dayHeaderFormat={{
                         weekday: 'long'
                     }}
-                    eventAdd = {}
+                
                     // event = {{
                     //     onEventAdded
                     // }}
@@ -211,7 +234,7 @@ export default function Calendar() {
             <CalendarAddEvent 
             isLecture = {isLecture} 
             isOpen = {modalOpen} 
-            onClose = {()=> setModalOpen(false)} 
+            onClose = {()=> {setModalOpen(false); addEventData(addedevent)}} 
             onEventAdded={(added) => {onEventAdded(added); handleDataName(added)}}
             
             />
