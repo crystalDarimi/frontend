@@ -130,7 +130,7 @@ import {useNavigate} from "react-router-dom";
 
 
 
-const AddmyStudents = () => {
+const AddLecture = () => {
         const [color,setColor]=useState('');
         console.log(color);
 
@@ -158,18 +158,17 @@ const AddmyStudents = () => {
         const onSubmit= async(e)=>{
             e.preventDefault();
             
-            await axios.post("http://prod-eple-crystal-api-service.ap-northeast-2.elasticbeanstalk.com/eple/v1/mystudent/lecture", user)
+            await axios.post("http://prod-eple-crystal-api-service.ap-northeast-2.elasticbeanstalk.com/eple/v1/mystudent/lecture", user) // url넣어둠
+            navigate("/mystudents") // mystudents페이지로 이동하도록
             console.log(e)
-            navigate("/mystudents")
         }
 
         return (
             <form >
-                <div className='AddmyStudents'>
+                <div className='AddLecture'>
                         {/* <Header>
                             <h1>mystudents</h1>
                         </Header> */}
-                        <form>
                     <div className="container">
                         <div className="lectureTitle">
                             <label>과외 이름</label>
@@ -179,9 +178,29 @@ const AddmyStudents = () => {
                             <div style={{background:'red',width:'50px',height:'50px'}} onClick={()=>setColor('red')}/>
                             <div style={{background:'blue',width:'50px',height:'50px'}} onClick={()=>setColor('blue')}/>
                             <div style={{background:'yellow',width:'50px',height:'50px'}} onClick={()=>setColor('yellow')}/>
-                            <div style={{background:'black',width:'50px',height:'50px'}} onClick={()=>setColor('#22222')}/>
+                            <div style={{background:'black',width:'50px',height:'50px'}} onClick={()=>setColor('black')}/>
                             <div style={{background:'grey',width:'50px',height:'50px'}} onClick={()=>setColor('grey')}/>
                             <input name={'color'} placeholder={color}/>
+                        </div>
+                        <div className="cycle">
+                            <label>입금 주기</label>
+                            <input name="cycle" type="number" value={cycle} onChange={(e) => onInputChange(e)} />
+                        </div>
+                        <div className="minutesPerOnce">
+                            <label>과외 1회당 진행 시간</label>
+                            <input name="minutesPerOnce" type="number" value={minutesPerOnce} onChange={(e) => onInputChange(e)} />
+                        </div>
+                        <div className="dayOne">
+                            <label>과외 요일 1</label>
+                            <input name="dayOne" type="number" value={dayOne} onChange={(e) => onInputChange(e)} />
+                        </div>
+                        <div className="dayTwo">
+                            <label>과외 요일 2</label>
+                            <input name="dayTwo" type="number"  value={dayTwo} onChange={(e) => onInputChange(e)} />
+                        </div>
+                        <div className="fee">
+                            <label>과외비</label>
+                            <input name="fee" type="number" value={fee} onChange={(e)=>onInputChange(e)}/>만원
                         </div>
                         <div className="stdName">
                             <label>학생 이름</label>
@@ -196,54 +215,17 @@ const AddmyStudents = () => {
                             <input name="momNumber" type="tel" value={momNumber} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="schoolAge">
-                            <label>학교/학년</label>
+                            <label>나이/학교</label>
                             <input name="schoolAge" value={schoolAge} onChange={(e) => onInputChange(e)} />
                         </div>
-                        <div className="">
-                            <label>학교/학년</label>
-                            <input name="schoolAge" value={schoolAge} onChange={(e) => onInputChange(e)} />
-                        </div>
-                        <div className="fee">
-                            <label>과외 금액</label>
-                            <input name="fee" type="text" value={fee} onChange={(e)=>onInputChange(e)}/>만원
-                        </div>
-                        <div className="minutesPerOnce">
-                            <label>과외 진행 시간</label>
-                            <input name="minutesPerOnce" value={minutesPerOnce} onChange={(e) => onInputChange(e)} />
-                        </div>
-                        <div className="dayOne">
-                            <label>과외 요일 및 시간</label>
-                            <input name="dayOne" value={dayOne} onChange={(e) => onInputChange(e)} />
-                            {/* <DatePicker
-                                className="dayOne"
-                                selected={dayOne}
-                                onChange={(e) => onInputChange(e)}
-                                timeInputLabel="Time:"
-                                dateFormat="MM/dd/yyyy h:mm aa"
-                                showTimeInput
-                            />                         */}
-                        </div>
-                        <div className="dayTwo">
-                            <label>과외 요일 및 시간</label>
-                            <input name="dayTwo" value={dayTwo} onChange={(e) => onInputChange(e)} />
-                            {/* <DatePicker
-                                className="dayTwo"
-                                selected={dayTwo}
-                                onChange={(e) => onInputChange(e)}
-                                timeInputLabel="Time:"
-                                dateFormat="MM/dd/yyyy h:mm aa"
-                                showTimeInput
-                            />     */}
-                        </div>
-
                         <div className="btn">
                             <button type="submit"  onSubmit={e => onSubmit(e)}>작성완료</button>
                         </div>
                         </div>
-                        </form>
+                       
                 </div>
             </form>
     );
 }
 
-export default AddmyStudents;
+export default AddLecture;
