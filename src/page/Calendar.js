@@ -29,18 +29,16 @@ export default function Calendar() {
         headers.append("Authorization","Bearer "+accessToken);
     }
 
-    const [state, setState] = useState({ eventlist: [
-        
-    ]});
+    const [state, setState] = useState({ eventlist: []});
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
 
     const [addedevent, setAddedevent] = useState({
-        id: "",
+        //id: "",
         lectureTitle: "",
-        start:  moment().format("yyyy-MM-dd HH:mm"),
-        end:  moment().format("yyyy-MM-dd HH:mm")
+        start: "",
+        end: ""
     });
 
     // useEffect(() => {
@@ -119,11 +117,10 @@ export default function Calendar() {
     }
     
     function handleDataName(event){
-        const thisEvents = state.eventlist;
         addedevent.lectureTitle = JSON.stringify(event.title);
         addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
         addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
-        addedevent.id = "ID-" + thisEvents.length;
+        //addedevent.id = "ID-" + thisEvents.length;
         
         return addedevent;
     }
