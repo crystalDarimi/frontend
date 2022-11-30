@@ -12,7 +12,9 @@ import CalendarAddEvent from '../components/modals/CalendarAddEvent'
 import '../styles/CalendarAddEvent.css'
 import listPlugin from '@fullcalendar/list';
 import {call,signout} from "../service/ApiService";
-
+import moment from 'moment';
+import {API_BASE_URL}  from "../api-config.js";
+const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 
 
@@ -23,8 +25,9 @@ export default function Calendar() {
     const [isLecture, setIsLecture] = useState(false);
     const [addedevent, setAddedevent] = useState({
         lectureTitle: "",
-        start: "",
-        end: ""
+        start:  moment().format("yyyy-MM-dd HH:mm"),
+        end:  moment().format("yyyy-MM-dd HH:mm"),
+        scheduleId: null
     });
 
     // useEffect(() => {
@@ -82,21 +85,26 @@ export default function Calendar() {
     //     calendarApi.remove();
 
     // }
-    function handleEventAdd(added){
-        onEventAdded(added);
-        addEventData(added);
-    }
-    function addEventData(added){
-        setAddedevent(added);
+
+    function addEventData(){
         const thisEvents = state.eventlist;
-        added.id = "ID-" + thisEvents.length; // key를 위한 id추가
-        thisEvents.push(added); // 배열에 아이템 추가
+        thisEvents.push(addedevent); // 배열에 아이템 추가
         setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
         console.log("events : ", state.eventlist);
-        console.log(added)
-        call("/eple/v1/calendar/schedule", "POST", added)
+        console.log(addedevent)
+        call("/eple/v1/calendar/schedule", "POST", addedevent)
         
     }
+    function handleDataName(event){
+                const thisEvents = state.eventlist;
+                addedevent.lectureTitle = event.title;
+                addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
+                addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
+               // addedevent.scheduleId = "ID-" + thisEvents.length;
+                
+                return addedevent;
+            }
+
     
     
     const [hoverBtn, setHover] = useState(false);
@@ -209,7 +217,7 @@ export default function Calendar() {
             isLecture = {isLecture} 
             isOpen = {modalOpen} 
             onClose = {()=> setModalOpen(false)} 
-            onEventAdded={(added) => handleEventAdd(added)}
+            onEventAdded={(added) => {onEventAdded(added); handleDataName(added); addEventData(added)}}
             
             />
 
