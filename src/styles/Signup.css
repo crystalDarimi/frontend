@@ -1,0 +1,20 @@
+.SignupFormTag {
+    position: relative;
+    margin-top: 100px;
+    margin-left: 200px;
+}
+.css-nzinn5-MuiContainer-root{
+    width: 400px !important;
+}
+.MuiContainer-root{
+    margin-top: 5% !important;
+}
+.css-nzinn5-MuiContainer-root{
+    margin-left: 20% !important;
+}
+.SignupPageModal{
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}

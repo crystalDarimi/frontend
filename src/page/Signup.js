@@ -1,6 +1,8 @@
 import React from "react";
 import {Container, Grid, Typography, TextField, Button,Link }  from "@mui/material";
 import {signup} from "../service/ApiService";
+import "../styles/Signup.css"
+import Modal from 'react-modal';
 
 const Signup = () =>{
     const handleSubmit = (event) =>{
@@ -19,8 +21,9 @@ const Signup = () =>{
     };
 
     return(
-        <Container component= "main" maxWidth="xs" style={{marginTop:"8%"}}>
-            <form noValidate onSubmit={handleSubmit}>
+
+        <Container className = "container" component= "main" maxWidth="xs">
+            <form className = "SignupFormTag" noValidate onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs = {12}>
                         <Typography component= "h1" variant="h5">
@@ -87,6 +90,7 @@ const Signup = () =>{
                 </Grid>
             </form>
         </Container>
+
     );
 };
 

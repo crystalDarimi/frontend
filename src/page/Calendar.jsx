@@ -23,11 +23,11 @@ export default function Calendar() {
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
+
     const [addedevent, setAddedevent] = useState({
-        lectureTitle: "",
-        start:  moment().format("yyyy-MM-dd HH:mm"),
-        end:  moment().format("yyyy-MM-dd HH:mm"),
-        scheduleId: null
+       title: "",
+        start:  "",
+        end: "",
     });
 
     // useEffect(() => {
@@ -39,52 +39,8 @@ export default function Calendar() {
     const onEventAdded = (added) => {
         let calendarApi = calendarRef.current.getApi();
         calendarApi.addEvent(added);
-        // call("eple/v1/calendar/schedule", "POST", added).then((response) =>
-        //     setState({ events: response.data })
-        // );
     };
 
-
-    // const addEventData = (events) => {
-
-    //     const thisEvents = state.events;
-    //     events.id = "ID-" + thisEvents.length; // key를 위한 id추가
-    //     thisEvents.push(events); // 배열에 아이템 추가
-    //     setState({ events: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
-    //     console.log("events : ", state.events);
-
-
-
-
-    //     call("eple/v1/calendar/schedule", "POST", events).then((response) =>
-    //         setState({ events: response.data })
-    //     );
-    // };
-    
-// 과외에서 입력한 색상! 추가할 때 적용되게
-// 가능하다면 필터..
-    // const onEventAdded = added => {
-    //     let calendarApi = calendarRef.current.getApi();
-    //     calendarApi.addEvent(added);  
-    //     }
-    // const onEventGet = added => {
-    //     call("eple/v1/calendar/{calendarid}", "GET", added).then((response) =>
-    //         setState({ events: response.data })
-    //     );
-    //     let calendarApi = calendarRef.current.getApi();
-    //     calendarApi.getEvent(added);
-    //     // let calendarApi = calendarRef.current.getApi();
-    //     // calendarApi.getEvent();
-    //     //수정 필요
-    //     }
-    // const onEventDeleted = deleted => {
-    // call({/*"/eple/v1/mystudent/lecture"*/}, "DELETE", deleted).then((response) =>
-    //         setState({ deleted: response.data })
-    //     );
-    //     let calendarApi = calendarRef.current.getApi();
-    //     calendarApi.remove();
-
-    // }
 
     function addEventData(){
         const thisEvents = state.eventlist;
@@ -92,19 +48,17 @@ export default function Calendar() {
         setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
         console.log("events : ", state.eventlist);
         console.log(addedevent)
-        call("/eple/v1/calendar/schedule", "POST", addedevent)
+        
         
     }
     function handleDataName(event){
-                const thisEvents = state.eventlist;
-                addedevent.lectureTitle = event.title;
-                addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
-                addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
-               // addedevent.scheduleId = "ID-" + thisEvents.length;
-                
-                return addedevent;
-            }
-
+        const thisEvents = state.eventlist;
+        addedevent.title = event.title;
+         addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
+        addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
+        // addedevent.scheduleId = "ID-" + thisEvents.length;
+         call("/eple/v1/calendar/schedule", "POST", addedevent)
+        }
     
     
     const [hoverBtn, setHover] = useState(false);
@@ -204,14 +158,14 @@ export default function Calendar() {
 
             </section>
             <section className="Calendar2">
-                <FullCalendar className="FullCalendar2"
+                {/* <FullCalendar className="FullCalendar2"
                     plugins={[listPlugin]}
                     initialView="listDay"
                     height={550}
                     headerToolbar={false}
                 
                 //eventAdd = {event => handleEventAdd(event)}
-                />
+                /> */}
             </section>
             <CalendarAddEvent 
             isLecture = {isLecture} 
@@ -232,6 +186,50 @@ export default function Calendar() {
 
 
 }
+
+
+
+
+    // const addEventData = (events) => {
+
+    //     const thisEvents = state.events;
+    //     events.id = "ID-" + thisEvents.length; // key를 위한 id추가
+    //     thisEvents.push(events); // 배열에 아이템 추가
+    //     setState({ events: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
+    //     console.log("events : ", state.events);
+
+
+
+
+    //     call("eple/v1/calendar/schedule", "POST", events).then((response) =>
+    //         setState({ events: response.data })
+    //     );
+    // };
+    
+// 과외에서 입력한 색상! 추가할 때 적용되게
+// 가능하다면 필터..
+    // const onEventAdded = added => {
+    //     let calendarApi = calendarRef.current.getApi();
+    //     calendarApi.addEvent(added);  
+    //     }
+    // const onEventGet = added => {
+    //     call("eple/v1/calendar/{calendarid}", "GET", added).then((response) =>
+    //         setState({ events: response.data })
+    //     );
+    //     let calendarApi = calendarRef.current.getApi();
+    //     calendarApi.getEvent(added);
+    //     // let calendarApi = calendarRef.current.getApi();
+    //     // calendarApi.getEvent();
+    //     //수정 필요
+    //     }
+    // const onEventDeleted = deleted => {
+    // call({/*"/eple/v1/mystudent/lecture"*/}, "DELETE", deleted).then((response) =>
+    //         setState({ deleted: response.data })
+    //     );
+    //     let calendarApi = calendarRef.current.getApi();
+    //     calendarApi.remove();
+
+    // }
 
 
 

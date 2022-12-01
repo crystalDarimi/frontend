@@ -14,7 +14,7 @@ import MyStudent from "./page/MyStudent";
 
 function Copyright(){
     return(
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography  variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             crystal darimi, {new Date().getFullYear()}
             {"."}
@@ -27,6 +27,7 @@ const AppRouter=() =>{
             <BrowserRouter>
                 {<Header />}
                 <Sidebar>
+                    <section>
                 <Routes>
                     <Route path ="/login" element = {<Login/>}/>
                     <Route path ="/" element = {<App /> }/>
@@ -35,11 +36,14 @@ const AppRouter=() =>{
                     <Route path="/mystudents" element={<MyStudent/>}/>
 
                 </Routes>
+                </section>
                 </Sidebar>
             </BrowserRouter>
-            <Box mt ={5}>
+            <footer>
+            <Box mt ={5} className="copyright">
                 <Copyright />
              </Box>
+             </footer>
         </div>
     );
 };
