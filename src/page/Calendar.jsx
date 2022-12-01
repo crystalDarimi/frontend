@@ -13,17 +13,25 @@ import '../styles/CalendarAddEvent.css'
 import listPlugin from '@fullcalendar/list';
 import {call,signout} from "../service/ApiService";
 import moment from 'moment';
+import Modal from 'react-modal';
 import {API_BASE_URL}  from "../api-config.js";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
-
+// export function updateOrDelete(){  
+//     return(
+//             <div className='updateOrDeleteButtons'>
+//                 <button className='Update'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 수정하기</button>
+//                 <button className='Delete'>삭제하기</button>
+//             </div>
+//     )
+// }
 
 export default function Calendar() {
     const [state, setState] = useState({ eventlist: []});
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
-
+    const [openUD, setOpenUD] = useState(false);
     const [addedevent, setAddedevent] = useState({
        title: "",
         start:  "",
@@ -35,6 +43,7 @@ export default function Calendar() {
     //         setState({items: response.data});
     //     });
     // }, []);
+    
 
     const onEventAdded = (added) => {
         let calendarApi = calendarRef.current.getApi();
@@ -52,7 +61,7 @@ export default function Calendar() {
         
     }
     function handleDataName(event){
-        const thisEvents = state.eventlist;
+        //const thisEvents = state.eventlist;
         addedevent.title = event.title;
          addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
         addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
@@ -62,11 +71,8 @@ export default function Calendar() {
     
     
     const [hoverBtn, setHover] = useState(false);
-    // function getEvent(id){
-    //     let calendarApi = calendarRef.current.getApi();
-    //     calendarApi.getEventById(id);
-    // }
 
+    //만들기 버튼 위에 커서 올리면 일정, 과외 추가버튼 나오게 조절하는 함수
     function openMouseHover(){
         setHover(true);
     }
@@ -103,59 +109,33 @@ export default function Calendar() {
                     // }}
                     
                     dateClick = {function(info) {
-                        
-                            //alert('Clicked on: ' + info.dateStr);//날짜 클릭하면 뭐 나옴}
- 
+                        //날짜 클릭하면 발생하는 이벤트 설정 가능
                       }}
-                    eventClick = {function(info) {
+                    eventClick = {function(info) {//이벤트 클릭하면 삭제 알림창 뜨고 확인 누르면 삭제
+                        /* { <div className='updateOrDeleteButtons'>
+                        <button className='Update'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 수정하기</button>
+                        <button className='Delete'>삭제하기</button>
+                    </div>} 수정 추가해서 진행 중인 부분으로 일단을 무시하셔도 됩니다! */
+                      
                     if(window.confirm("일정을 삭제하시겠습니까?")){
                         info.event.remove();
                     }
                         //delete event from calender
-                    }} 
-                    // event = {getEventById(
-
-                    // )
-                    // }
-                   
-                   
+                    }}                    
                     
-                    
-                    // events={{
-                    //     url: '/myfeed.php',
-                    //     method: 'POST',
-                    //     extraParams: {
-                    //         custom_param1: 'something',
-                    //         custom_param2: 'somethingelse'
-                    //     },
-                    //     // failure: function () {
-                    //     //     alert('정보가 없습니다!');
-                    //     // },
-                    //     color: 'yellow',   // a non-ajax option
-                    //     textColor: 'black' // a non-ajax option
-                    // }}
-
-                //eventAdd = {event => handleEventAdd(event)}
                 />
                 <div>
                 <button className="PlusBtn"  onMouseEnter={openMouseHover} >
                     <AddIcon />
                     <div className='PlusBtnWord'>
                         만들기
-                    </div>
-                    
-                
+                    </div> 
                 </button>
                 {hoverBtn && <div className='hoverButtons'>
                     <button className='schedule'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 추가</button>
                     <button className='lecture'onMouseEnter={openMouseHover} onMouseLeave={closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(true)}}>과외 추가</button>
                     </div>}
                 </div>
-                
-                <div>
-                    {/* <CalendarAddEvent className = "addEvent" isOpen={this.state.modalOpen} onClose={() => {this.setState ({modalOpen : false})}} onEventAdded={added => this.onEventAdded(added)} /> */}
-                </div>
-
             </section>
             <section className="Calendar2">
                 {/* <FullCalendar className="FullCalendar2"
@@ -163,10 +143,11 @@ export default function Calendar() {
                     initialView="listDay"
                     height={550}
                     headerToolbar={false}
-                
+                //데일리창에 대한 부분... v1에서는 무시해주세요.
                 //eventAdd = {event => handleEventAdd(event)}
-                /> */}
+                /> */} 
             </section>
+            {/*이벤트 추가 모달 컴포넌트를 띄우는 부분입니다.*/}
             <CalendarAddEvent 
             isLecture = {isLecture} 
             isOpen = {modalOpen} 
