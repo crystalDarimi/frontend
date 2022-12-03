@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import '../styles/AddmyStudents.css'
+import '../styles/AddLecture.css'
 // import Header from './../components/Header';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
@@ -38,31 +38,33 @@ const AddLecture = () => {
 
         const onSubmit= async(e)=>{
             e.preventDefault()
-            await call("/eple/v1/mystudent/lecture", "POST", user); // url넣어둠
+            await call("/eple/v1/mystudent/lecture", "POST", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
             console.log(e)
+            navigate('/mystudents')
         }
 
         return (
             <form onSubmit={onSubmit}>
+                <h1>Mystudents</h1>
                 <div className='AddLecture'>
-                        {/* <Header>
-                            <h1>mystudents</h1>
-                        </Header> */}
                     <div className="container">
                         <div className="lectureCode">
                             <label>과외 코드</label>
                             <input name="lectureCode" type="text" value={lectureCode} onChange={(e)=>onInputChange(e)}/>
                         </div>
                         <div className="lectureTitle">
-                            <label>과외 이름</label>
+                            <label>과목 이름</label>
                             <input name="lectureTitle" type="text" value={lectureTitle} onChange={(e)=>onInputChange(e)}/>
                         </div>
                         <div className="color">
-                            <div style={{background:'red',width:'50px',height:'50px'}} onClick={()=>onColorChange('red')} />
-                            <div style={{background:'blue',width:'50px',height:'50px'}} onClick={()=>onColorChange('blue')} />
-                            <div style={{background:'yellow',width:'50px',height:'50px'}} onClick={()=>onColorChange('yellow')} />
-                            <div style={{background:'black',width:'50px',height:'50px'}} onClick={()=>onColorChange('black')} />
-                            <div style={{background:'grey',width:'50px',height:'50px'}} onClick={()=>onColorChange('grey')} />
+                            <label>과외 색상 선택</label>
+                            <div className="colorpick">
+                                <div style={{background:'red',width:'50px',height:'50px'}} onClick={()=>onColorChange('red')} />
+                                <div style={{background:'blue',width:'50px',height:'50px'}} onClick={()=>onColorChange('blue')} />
+                                <div style={{background:'yellow',width:'50px',height:'50px'}} onClick={()=>onColorChange('yellow')} />
+                                <div style={{background:'black',width:'50px',height:'50px'}} onClick={()=>onColorChange('black')} />
+                                <div style={{background:'grey',width:'50px',height:'50px'}} onClick={()=>onColorChange('grey')} />
+                                </div>
                             <input name={'color'} value={color} onChange={(e)=>onInputChange(e)}/>
                         </div>
                         <div className="cycle">
@@ -81,11 +83,11 @@ const AddLecture = () => {
                             </label>
                         </div> */}
                         <div className="dayOne">
-                            <label>과외 요일 1</label>
+                            <label>과외 요일 1 - 숫자로 입력(월:0, 화:1, 수:2, 목:3, 금:4, 토:5, 일: 6)</label>
                             <input name="dayOne" type="number" value={dayOne} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="dayTwo">
-                            <label>과외 요일 2</label>
+                            <label>과외 요일 2 - 숫자로 입력(월:0, 화:1, 수:2, 목:3, 금:4, 토:5, 일: 6)</label>
                             <input name="dayTwo" type="number"  value={dayTwo} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="fee">
@@ -105,7 +107,7 @@ const AddLecture = () => {
                             <input name="momNumber" type="tel" value={momNumber} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="schoolAge">
-                            <label>나이/학교</label>
+                            <label>학교/나이</label>
                             <input name="schoolAge" value={schoolAge} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="btn">

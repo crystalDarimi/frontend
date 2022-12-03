@@ -1,11 +1,10 @@
 import React, {Fragment} from 'react';
 // import Mystudents from './../components/Mystudents'
 import '../styles/Mystudents.css'
-// import Header from './../components/Header';
 import { Link } from "react-router-dom";
 import {useEffect, useState} from "react";
-import MyStudent from './MyStudent';
 import { call } from "../service/ApiService";
+import AddIcon from '@material-ui/icons/Add';
 
 
 const Mystudents = () => {
@@ -21,11 +20,13 @@ const Mystudents = () => {
         setUsers(result.data);
     }
 
+    
+
     return(
         <div className="container">
-            <h1>학생 관리 페이지</h1>
+            <h1>Mystudents</h1>
             <Link to = '/AddLecture'>
-                <button>학생 추가하기</button>
+                <button id="addbtn"><p>+</p>학생 추가하기</button>
             </Link>
             <div className="card">
                 <div className="card-title">
@@ -40,6 +41,7 @@ const Mystudents = () => {
                                 <td>진행회차</td>
                                 <td>수업진행요일</td>
                                 <td>과외 금액</td>
+                                <td>수정/삭제</td>
                             </tr>
                         </thead>
                         <tbody>
