@@ -11,6 +11,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import MyStudents from "./page/MyStudent";
 import AddLecture from './page/AddLecture';
+import EditLecture from './page/EditLecture';
 
 
 function Copyright(){
@@ -35,7 +36,7 @@ const AppRouter=() =>{
                     <Route path="/calendar" element={<Calendar/>}/>
                     <Route path="/mystudents" element={<MyStudents/>}/>
                     <Route path="/AddLecture" element={<AddLecture />}/>
-
+                    <Route path="/EditLecture/:id" element={<EditLecture />}/>
                 </Routes>
                 </Sidebar>
             </BrowserRouter>

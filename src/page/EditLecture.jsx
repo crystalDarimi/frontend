@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../styles/AddLecture.css'
-// import Header from './../components/Header';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { call } from "../service/ApiService";
 
 
 
 
-const AddLecture = () => {
+const EditLecture = () => {
         let navigate = useNavigate()
+
 
         const [user, setUser] = useState({
             lectureCode:"",
@@ -37,10 +37,12 @@ const AddLecture = () => {
 
         const onSubmit= async(e)=>{
             e.preventDefault()
-            await call("/eple/v1/mystudent/lecture", "POST", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
+            await call("/eple/v1/mystudent/lecture", "PUT", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
             console.log(e)
             navigate('/mystudents')
         }
+
+
 
         return (
             <form onSubmit={onSubmit}>
@@ -110,7 +112,7 @@ const AddLecture = () => {
                             <input name="schoolAge" value={schoolAge} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="btn">
-                            <button type="submit">작성완료</button>
+                            <button type="submit">수정 완료</button>
                         </div>
                         </div>
                        
@@ -119,4 +121,4 @@ const AddLecture = () => {
     );
 }
 
-export default AddLecture;
+export default EditLecture;

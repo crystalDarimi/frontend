@@ -1,6 +1,8 @@
-import React from "react";
+import React,{useState} from "react";
 import {Container, Grid, Typography, TextField, Button,Link }  from "@mui/material";
 import {signup} from "../service/ApiService";
+import '../styles/Signup.css';
+import {isChecked} from 'react';
 
 const Signup = () =>{
     const handleSubmit = (event) =>{
@@ -18,13 +20,17 @@ const Signup = () =>{
         );
     };
 
+    const [isChecked, setIsChecked] = useState(false);
+
+
+
     return(
         <Container component= "main" maxWidth="xs" style={{marginTop:"8%"}}>
             <form noValidate onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs = {12}>
                         <Typography component= "h1" variant="h5">
-                            계정 생성
+                            회원가입
                         </Typography>
                     </Grid>
                     <Grid item xs = {12}>
@@ -49,17 +55,36 @@ const Signup = () =>{
                             autoComplete="email"
                             autoFocus />
                     </Grid>
-                    <Grid item xs = {12}>
+                    {/* <Grid item xs = {4} display="flex">
                         <TextField
                             variant = "outlined"
                             required
                             fullWidth
-                            id = "rola"
-                            label = "역할"
-                            name = "role"
+                            id = "rola1"
+                            label = "역할(선생)"
+                            name = "role1"
                             autoComplete="role"
+                            type="checkbox"
                             autoFocus />
-                    </Grid>
+                        <TextField
+                            variant = "outlined"
+                            required
+                            fullWidth
+                            id = "rola2"
+                            label = "역할(학생)"
+                            name = "role2"
+                            autoComplete="role"
+                            type="checkbox"
+                            autoFocus />
+                    </Grid> */}
+                    {/* <div>
+                        <h1>{isChecked ? setIsChecked(true) : setIsChecked(false)}</h1>
+                        <input name='teacher'type='checkbox' />
+                    </div> */}
+                    {/* <div>
+                        <h1>{isChecked ? setIsChecked(true) : setIsChecked(false)}</h1>
+                        <input name='student'type='checkbox' />
+                    </div> */}
                     <Grid item xs={12}>
                         <TextField
                             variant="outlined"
