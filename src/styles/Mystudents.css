@@ -1,15 +1,77 @@
-.PageNameMystudents {
-    position: absolute;
-    top: 20px;
-    left: 270px;
-    font-size: 35px;
-    font-weight: 400;
-    font-family: 'Poppins';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem;
+
+
 }
-.AddLectureButton{
-    position: relative;
-    top: 20px;
-    font-size: 35px;
-    font-weight: 400;
-    font-family: 'Poppins';
+  
+table {
+    border-collapse: collapse;
+    width: 1024px;
+    border: 1px solid;
+    margin-top: 20px;
 }
+
+td {
+    border: 1px solid #ffffff;
+    text-align: left;
+    padding: 8px;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 18px;
+    color: #303134;
+
+}
+  
+tr {
+    border: 2px solid #D4D4D4;
+}
+  
+
+form {
+    display: flex;
+    gap: 5px;
+}
+  
+form td:last-child {
+    display: flex;
+    justify-content: space-evenly;
+}
+  
+.row{
+    display:flex;
+}
+
+.col{
+    min-width:100px;
+}
+
+#addbtn{
+    margin-left: 875px;
+    margin-top: 30px;
+    width: 150px;
+    height: 50px;
+    border: 1px solid #D4D4D4;
+    border-radius: 15px;
+    font-size: 15px;
+    background: #FFFFFF;
+    display: flex;
+    padding-left: 20px;
+    padding-top: 13px;
+}
+
+p{
+    color: #00A8C6;
+    font-size: 30px;
+    display: flex;
+    margin-top: -9px;
+    margin-left: -5px;
+    margin-right: 5px;
+}
+  
