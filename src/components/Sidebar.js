@@ -35,6 +35,11 @@ const Sidebar = ({children}) => {
             icon: <PeopleOutlineIcon />,
             path: "./mystudents"
         },
+        {
+            name:"My Class",
+            icon: <PeopleOutlineIcon />,
+            path: "./myclass"
+        },
     ]
     return(
         <div className="container">
