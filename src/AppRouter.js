@@ -9,8 +9,9 @@ import Calendar from "./page/Calendar";
 import './components/Sidebar';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-import MyStudent from "./page/MyStudent";
 import MyClass from "./page/MyClass";
+import Mystudents from "./page/Mystudents";
+import AddLecture from "./page/AddLecture";
 
 
 function Copyright(){
@@ -34,8 +35,9 @@ const AppRouter=() =>{
                     <Route path ="/" element = {<App /> }/>
                     <Route path = "/signup" element = {<Signup/> }/>
                     <Route path="/calendar" element={<Calendar/>}/>
-                    <Route path="/mystudents" element={<MyStudent/>}/>
+                    <Route path="/mystudent" element={<Mystudents/>}/>
                     <Route path="/myclass" element={<MyClass/>}/>
+                    <Route path="/AddLecture" element={<AddLecture />}/>
 
                 </Routes>
                 </section>
