@@ -37,7 +37,7 @@
     font-size: 20px;
     font-weight: 500;
     color: rgb(74, 74, 74);
-    text-decoration: underline 2px;
+    text-decoration: underline 1.5px;
     text-underline-position: under;
     text-decoration-color: gray;
 }

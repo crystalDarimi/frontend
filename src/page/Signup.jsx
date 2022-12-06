@@ -4,15 +4,19 @@ import {signup} from "../service/ApiService";
 import "../styles/Signup.css"
 import Modal from 'react-modal';
 
-const Signup = () =>{
+const Signup = ({teacherTrue}) =>{
+    
     const handleSubmit = (event) =>{
         event.preventDefault(); //오브젝트에서 form에 저장된 데이터를 앱의 형태로 바꿔줌
         const data = new FormData(event.target);
         const username = data.get("username");
         const email = data.get("email");
         const password = data.get("password");
-        const role = data.get("role");
-        signup({email:email,username:username,password:password,role:role}).then(
+
+        let isTeacher;
+        if(data.get("isTeacher")==="true") {isTeacher = true; teacherTrue();}
+        else {isTeacher = false;}
+        signup({email:email,username:username,password:password,isTeacher:isTeacher}).then(
             (response)=>{
                 //회원가입 (계정 생성 성공시 login페이지로 리디렉트)
                 window.location.href = "/login";
@@ -21,9 +25,8 @@ const Signup = () =>{
     };
 
     return(
-
-        <Container className = "container" component= "main" maxWidth="xs">
-            <form className = "SignupFormTag" noValidate onSubmit={handleSubmit}>
+        <Container component= "main" maxWidth="xs" style={{marginTop:"8%"}}>
+            <form noValidate onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs = {12}>
                         <Typography component= "h1" variant="h5">
@@ -57,10 +60,10 @@ const Signup = () =>{
                             variant = "outlined"
                             required
                             fullWidth
-                            id = "rola"
-                            label = "역할"
-                            name = "role"
-                            autoComplete="role"
+                            id = "isTeacher"
+                            label = "isTeacher"
+                            name = "isTeacher"
+                            autoComplete="isTeacher"
                             autoFocus />
                     </Grid>
                     <Grid item xs={12}>
@@ -90,10 +93,7 @@ const Signup = () =>{
                 </Grid>
             </form>
         </Container>
-
     );
 };
 
 export default Signup;
-
-

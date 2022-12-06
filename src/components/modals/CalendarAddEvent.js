@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 /* import Datetime from 'react-datetime'; */
 import { setExtendedProp } from '@fullcalendar/react'
@@ -7,6 +7,7 @@ import '../../styles/CalendarAddEvent.css'
 import Modal from 'react-modal';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import {call,signout} from "../../service/ApiService";
 import { TextField } from "@mui/material";
 
 
@@ -14,12 +15,26 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
     const [title, setTitle] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
-    const [lectureEntity, setLectureEntity] = useState(null)
+    const [lectureEntity, setLectureEntity] = useState(null);
+    const [users, setUsers] = useState([]);
+    
+
+    useEffect(()=>{
+        loadUser();
+    },[]);
+
+    const loadUser =  async() => {
+        const result = await call("/eple/v1/mystudent/lecture");
+        setUsers(result.data);
+        console.log(users)
+    }
     //lectureEntity... 값을 select 하기.
+
+    //dropbar에 들어가는 임시값입니다! 지우셔도 됩니다.
     const options = [
         'one', 'two', 'three'
     ]
-    const defaultOption = options[0];
+    const defaultOption = users[0];
 
 
     const onSubmit = (event) => {
@@ -74,7 +89,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
                     <div className="addEvntFormInsider">
                         <div>
                             <label className="text dropdown">과외 선택</label>
-                            <Dropdown className = "selectLecture" options={options} onChange={(lecture) => setLectureEntity(lecture)} value={defaultOption} placeholder="Select an option"  />
+                            <Dropdown className = "selectLecture" options={users} onChange={(lecture) => setLectureEntity(lecture)} value={defaultOption} placeholder="Select an option"  />
                         </div>
                         <div>
                             <label className="text eventTitle">과외 제목</label><br></br>

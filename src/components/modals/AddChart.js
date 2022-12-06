@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import Modal from 'react-modal';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { call } from "../../service/ApiService";
+import "../../styles/MyClass.css"
 
 
-
-export default function AddChart({ isOpen, onClose, onChartAdded }) {
+export default function AddChart({ isOpen, onClose, onChartAdded}) {
     const [id, setId] = useState("");
     const [title, setTitle] = useState(" ");
     const [content, setContent] = useState(" ");
@@ -18,7 +19,7 @@ export default function AddChart({ isOpen, onClose, onChartAdded }) {
     const onSubmit = (data) => {
         data.preventDefault();
         onChartAdded({
-            id,
+            //id,
             title,
             content,
             homework,
@@ -26,6 +27,7 @@ export default function AddChart({ isOpen, onClose, onChartAdded }) {
             // updatedAt,
             user_id
         })
+
         onClose();
     }
     //if문으로 일정 과외 나누기
@@ -33,37 +35,37 @@ export default function AddChart({ isOpen, onClose, onChartAdded }) {
     return (
 
         <div className="addChart">
-            <Modal isOpen={isOpen} onRequestClose={onClose} className="addChartModal">
+            <Modal appElement={document.getElementById('app')} ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} className="addChartModal">
                 <form onSubmit={onSubmit} className="addChartForm">
 
                     <div className="addChartFormInsider">
-                         <div>
-                            <label className="text charNum">수업 회차</label>
-                            <input className="UserInput lectureId" value={id} onChange={(e) => setId(e.target.value)} />
+                         {/* <div>
+                            <label className="text charNum">수업 회차</label><p/>
+                            <input className="UserInputMyClass lectureId" name="id" value={id} onChange={(e) => setId(e.target.value)} />
 
-                        </div>
+                        </div> */}
                         <div>
-                            <label className="text title">수업 이름</label>
-                            <input className="UserInput lectureDate" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <label className="text title">수업 이름</label><p/>
+                            <input className="UserInputMyClass lectureDate" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-                        </div>
-
-                        <div>
-                            <label className="text lectureContent">학습 내용 및 진도</label>
-                            <textarea className="UserInput lectureContent" value={content} onChange={(e) => setContent(e.target.value)} />
                         </div>
 
                         <div>
-                            <label className="text homework">숙제</label>
-                            <textarea className="UserInput homework" value={homework} onChange={(e) => setHomework(e.target.value)} />
-                        </div>
-                        <div>
-                            <label className="text user_id">작성자</label>
-                            <textarea className="UserInput user_id" value={user_id} onChange={(e) => setUser_id(e.target.value)}/>
+                            <label className="text lectureContent">학습 내용 및 진도</label><p/>
+                            <textarea className="UserInputMyClass lectureContent" value={content} onChange={(e) => setContent(e.target.value)} />
                         </div>
 
                         <div>
-                            <button type="submit" className="closeBtn" /*  onClick={() => closeModal(false)} */>저장하기</button>
+                            <label className="text homework">숙제</label><p/>
+                            <textarea className="UserInputMyClass homework" value={homework} onChange={(e) => setHomework(e.target.value)} />
+                        </div>
+                        <div>
+                            <label className="text user_id">작성자</label><p/>
+                            <textarea className="UserInputMyClass user_id" value={user_id} onChange={(e) => setUser_id(e.target.value)}/>
+                        </div>
+
+                        <div>
+                            <button type="submit" className="closeBtnMyClass" /*  onClick={() => closeModal(false)} */>저장하기</button>
                         </div>
                         {/* <div>
                         <input className="UserInput inputNumber" value={number} onChange={(e) => setNumber(e.target.value)} />
