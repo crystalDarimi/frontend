@@ -24,30 +24,33 @@ function Copyright() {
     );
 }
 const AppRouter = () => {
-    const [teacher, setTeacher] = useState(false);
-    let isTeacher;
-    function teacherTrue() {
-        setTeacher(true);
-    }
-    function giveTeacher(){
-        isTeacher = teacher;
-        return isTeacher;
-    }
+    // const [teacher, setTeacher] = useState(false);
+    // let isTeacher;
+    // function teacherTrue() {
+    //     setTeacher(true);
+    // }
+    // function giveTeacher(){
+    //     isTeacher = teacher;
+    //     return isTeacher;
+    // }
 
     return (
         <div>
             <BrowserRouter>
                 {<Header />}
-                <Sidebar>
-                <Routes>
-                    <Route path ="/login" element = {<Login/>}/>
-                    <Route path ="/" element = {<App /> }/>
-                    <Route path = "/signup" element = {<Signup/> }/>
-                    <Route path="/calendar" element={<Calendar/>}/>
-                    <Route path="/mystudents" element={<MyStudents/>}/>
-                    <Route path="/AddLecture" element={<AddLecture />}/>
-                    <Route path="/EditLecture/:id" element={<EditLecture />}/>
-                </Routes>
+                <Sidebar /* isTeacher={async () => {await giveTeacher}} */>
+                    <section>
+                        <Routes>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/" element={<App />} />
+                            <Route path="/signup" element={<Signup /* teacherTrue={teacherTrue} */ />} />
+                            <Route path="/calendar" element={<Calendar />} />
+                            <Route path="/mystudents" element={<MyStudents/>}/>
+                            <Route path="/myclass" element={<MyClass />} />
+                            <Route path="/AddLecture" element={<AddLecture />} />
+                            <Route path="/EditLecture/:id" element={<EditLecture />}/>
+                        </Routes>
+                    </section>
                 </Sidebar>
             </BrowserRouter>
             <footer>
