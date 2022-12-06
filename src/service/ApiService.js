@@ -1,6 +1,6 @@
 import {API_BASE_URL}  from "../api-config";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
-
+const USER_INFO = "USER_INFO";
 
 
 
@@ -19,7 +19,6 @@ export const call =  (api, method, request) => {
         headers: headers,
         url: API_BASE_URL + api,
         method: method,
-        mode: 'cors'
     };
     if (request) {
         // GET method
@@ -27,16 +26,27 @@ export const call =  (api, method, request) => {
     }
     return fetch(options.url, options)
         .then((response) => {
-            return response.json();
-        })
-        // .catch((error) => {
-        //     // 추가된 부분
-        //     console.log(error.status);
-        //     if (error.status === 403) {
-        //         window.location.href = "/login"; // redirect
-        //     }
-        //     return Promise.reject(error);
-        // });
+            if (api.includes("/eple/v1/mystudent/lecture") && method === 'POST') {
+                return response.text();
+            }
+
+            return response.json().then((json) => {
+                if (!response.ok) {
+                    // response.ok가 true이면 정상적인 리스폰스를 받은것, 아니면 에러 리스폰스를 받은것.
+                    return Promise.reject(json);
+                }
+                return json;
+            })
+        }
+        )
+        .catch((error) => {
+            // 추가된 부분
+            console.log(error.status);
+            if (error.status === 403) {
+                window.location.href = "/login"; // redirect
+            }
+            return Promise.reject(error);
+        });
 }
 
 
@@ -46,6 +56,12 @@ export const signin = (userDTO) => {
             if(response.token){
                 //로컬 스토리지에 토큰 저장
                 localStorage.setItem(ACCESS_TOKEN,response.token);
+                localStorage.setItem(USER_INFO, {
+                    email: response.email,
+                    id: response.id,
+                    role: response.role,
+                    username: response.username,
+                  });
 
                 //token이 존재하는 경우 lecture 화면으로 redirect
                 window.location.href = "/";
@@ -62,4 +78,7 @@ export const signup = (userDTO) => {
     return call("/eple/v1/auth/signup","POST",userDTO);
 }
 
+export const getMe = () => { // 사용자 정보 확인
+    return localStorage.getItem(USER_INFO);
+}
 

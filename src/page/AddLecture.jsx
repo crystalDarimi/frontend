@@ -40,10 +40,8 @@ const AddLecture = () => {
         const onSubmit= async (e) =>{
             e.preventDefault();
             const res = await call("/eple/v1/mystudent/lecture", "POST", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
-            console.log(res)
             setInviteCode(res);
             setIsOpenForModal(true);
-            // navigate('/mystudents')
         }
 
         return (

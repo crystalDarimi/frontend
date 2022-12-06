@@ -27,7 +27,7 @@ const Signup = () =>{
         
         console.log(res);
         //회원가입 (계정 생성 성공시 login페이지로 리디렉트)
-        // window.location.href = "/login";
+        window.location.href = "/login";
     };
 
     const handleChange = (data) => {
@@ -60,7 +60,7 @@ const Signup = () =>{
             </div>
             <div className="username">
                 <label>학생일 경우 초대코드 입력</label>
-                <input name="inviteToken" type="text" />
+                <input name="inviteToken" type="text" disabled={isTeacher !== false} />
             </div>
             <div className="username">
                 <label>사용자 이름</label>
