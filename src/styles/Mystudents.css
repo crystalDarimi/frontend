@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase&display=swap');
 
 
 
@@ -12,14 +12,14 @@
 
 }
   
-table {
+.tableMystudent{
     border-collapse: collapse;
     width: 1024px;
     border: 1px solid;
     margin-top: 20px;
 }
 
-td {
+.tdMystudent{
     border: 1px solid #ffffff;
     text-align: left;
     padding: 8px;
@@ -29,17 +29,17 @@ td {
 
 }
   
-tr {
+.trMystudent {
     border: 2px solid #D4D4D4;
 }
   
 
-form {
+.formMystudent {
     display: flex;
     gap: 5px;
 }
   
-form td:last-child {
+.formMystudent td:last-child {
     display: flex;
     justify-content: space-evenly;
 }
@@ -50,6 +50,13 @@ form td:last-child {
 
 .col{
     min-width:100px;
+}
+.mystudentTitle{
+    position: absolute;
+    top: 20px;
+    left: 270px;
+    font-size: 35px;
+    font-family: 'Poppins';
 }
 
 #addbtn{
@@ -66,7 +73,7 @@ form td:last-child {
     padding-top: 13px;
 }
 
-p{
+.addbtn{
     color: #00A8C6;
     font-size: 30px;
     display: flex;

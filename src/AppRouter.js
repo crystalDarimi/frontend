@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 import App from "./App";
 import Login from "./page/Login";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import {Typography, Box} from "@mui/material";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Typography, Box } from "@mui/material";
 import Signup from "./page/Signup";
 import Calendar from "./page/Calendar";
 import './components/Sidebar';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
+<<<<<<< HEAD
 import MyStudents from "./page/MyStudent";
 import AddLecture from './page/AddLecture';
 import EditLecture from './page/EditLecture';
+=======
+import MyClass from "./page/MyClass";
+import Mystudents from "./page/Mystudents";
+import AddLecture from "./page/AddLecture";
+>>>>>>> main
 
 
-function Copyright(){
-    return(
+function Copyright() {
+    return (
         <Typography variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             crystal darimi, {new Date().getFullYear()}
@@ -23,8 +29,18 @@ function Copyright(){
         </Typography>
     );
 }
-const AppRouter=() =>{
-    return(
+const AppRouter = () => {
+    const [teacher, setTeacher] = useState(false);
+    let isTeacher;
+    function teacherTrue() {
+        setTeacher(true);
+    }
+    function giveTeacher(){
+        isTeacher = teacher;
+        return isTeacher;
+    }
+
+    return (
         <div>
             <BrowserRouter>
                 {<Header />}
@@ -40,9 +56,11 @@ const AppRouter=() =>{
                 </Routes>
                 </Sidebar>
             </BrowserRouter>
-            <Box mt ={5}>
-                <Copyright />
-             </Box>
+            <footer>
+                <Box mt={5} className="copyright">
+                    <Copyright />
+                </Box>
+            </footer>
         </div>
     );
 };

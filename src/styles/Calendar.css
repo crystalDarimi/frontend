@@ -1,5 +1,168 @@
-/* Calendar.css  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase&display=swap');
 
-/* 주말 날짜 토요일 파랑 , 일요일 빨강 */
-.fc-day-sun a { color: red }
-.fc-day-sat a {color: blue }
+.Calendar{
+    display: flex;
+}
+.FullCalendar1 {
+    font-family: 'Poppins';
+}
+
+.PageNameCalendar {
+    position: absolute;
+    top: 20px;
+    left: 270px;
+    font-size: 35px;
+    font-weight: 400px;
+    font-family: 'Poppins';
+}
+
+.Calendar1 {
+    margin-top: 0px;
+    width: 800px;
+    display: inline-block;
+}
+
+.Calendar2{
+    display: inline-block;
+    width: 20%;
+    margin-top: 104px;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 3em !important;
+    margin-left: 5px !important;
+}
+
+.fc .fc-daygrid-day-number {
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.fc .fc-daygrid-day-top {
+    display: flex;
+}
+
+.fc .fc-button-primary {
+    color: #fff;
+    color: var(--fc-button-text-color, #717579) !important;
+    background-color: #717579 !important;
+    background-color: var(--fc-button-bg-color, #FFFFFF) !important;
+    border-color: #717579 !important;
+    border-radius: 20px !important;
+}
+
+.fc-toolbar-chunk {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fc .fc-button-group {
+    position: static !important;
+    display: inline-flex;
+    background-color: #FFFFFF;
+    border: none !important;
+    align-items: center;
+}
+
+[role=row] {
+    height: 30px !important;
+
+}
+
+.fc-col-header-cell .fc-day .fc-day-tue {
+    height: 30px !important;
+}
+
+.fc-scrollgrid-sync-inner {
+    vertical-align: middle !important;
+    font-size: 13px !important;
+    color: #717579;
+}
+
+.PlusBtn {
+    z-index: 1;
+    position: absolute;
+    width: 95px;
+    height: 45px;
+    display: flex;
+    left: 1000px;
+    top: 680px;
+
+    border: none;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgb(167, 166, 166);
+    justify-content: center;
+    align-items: center;
+}
+
+.PlusBtn:hover {
+    background-color: #f9feff;
+}
+
+.PlusBtn:active {
+    background-color: #f9feff;
+    box-shadow: 0px 0px 3px rgb(167, 166, 166);
+}
+
+.MuiSvgIcon-root {
+    display: inline-flex !important;
+    color: #00A8C6;
+}
+
+.PlusBtnWord {
+    color: #717579;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: 'Poppins';
+    display: inline-flex;
+    margin-top: 3px;
+}
+
+.hoverButtons{
+    position: absolute;
+    z-index: 1;
+    width: 95px;
+    height: 60px;
+    display: flex;
+    left: 1000px;
+    top: 615px;
+    flex-direction: column;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgb(219, 219, 219);
+
+    
+}
+.hoverButtons .schedule{
+    width: 95px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    border:none;
+    
+    
+    display: block;
+}
+.hoverButtons .schedule:hover{
+    background-color: rgb(251, 244, 234);
+}
+.hoverButtons .lecture:hover{
+    background-color: rgb(251, 244, 234);
+}
+
+.hoverButtons .lecture{
+    width: 95px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: none;
+
+    display: block;
+}
+/* To specify background color and border
+.e-calendar {
+    background-color: rgb(224, 200, 179);
+    border: 3px solid red;
+} */
