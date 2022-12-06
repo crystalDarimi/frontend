@@ -9,15 +9,9 @@ import Calendar from "./page/Calendar";
 import './components/Sidebar';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-<<<<<<< HEAD
 import MyStudents from "./page/MyStudent";
 import AddLecture from './page/AddLecture';
 import EditLecture from './page/EditLecture';
-=======
-import MyClass from "./page/MyClass";
-import Mystudents from "./page/Mystudents";
-import AddLecture from "./page/AddLecture";
->>>>>>> main
 
 
 function Copyright() {

@@ -23,11 +23,11 @@ const Mystudents = () => {
         setUsers(result.data);
     }
 
-    const deleteLecture = async (lectureCode) => {
-        await call(`/eple/v1/mystudent/${lectureCode}`, "DELETE");
-        loadUser()
+    // const deleteLecture = async (users) => {
+    //     await call("/eple/v1/mystudent/lecture", "DELETE", users);
+    //     loadUser()
         
-    }
+    // }
 
 
 
@@ -72,7 +72,7 @@ const Mystudents = () => {
                                             <button className='edit'>Edit</button>
                                         </Link>
                                     
-                                        {<button className='delete' onClick={() => deleteLecture(data.lectureCode)}>Delete</button>}
+                                        {/* {<button className='delete' onClick={() => deleteLecture(data.lectureCode)}>Delete</button>} */}
                                        
                                         </td>
                                     </tr>
