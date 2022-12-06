@@ -9,20 +9,30 @@ const ChartTable = () => {
     const lectureNum = useRef(1);
     const [modalOpen, setModalOpen ] = useState(false); 
 
-    const handleRemove = (lectureNum) => {
-        setInfo(info => info.filter(data => data.lectureNum !== lectureNum))
-        lectureNum.current -= 1; //삭제시 회차 수정 필요!
+    const handleRemove = ({id}) => {
+        const newInfo = info.filter((data) => data.id !== id)
+        setInfo(newInfo);
     }
+
+    
+
 
     const handleSave = (data) => {
         setInfo(info => info.concat(
             {
-                number: lectureNum.current,
-                date: data.date,
-                contents: data.contents,
+                id: lectureNum.current,
+                title: data.title,
+                content: data.content,
                 homework: data.homework,
-                homeworkOX: data.homeworkOX,
-                progress: data.progress
+                createdAt: data.createdAt,
+                updatedAt: data.updatedAt,
+                user_id: data.user_id
+                // number: lectureNum.current,
+                // date: data.date,
+                // contents: data.contents,
+                // homework: data.homework,
+                // homeworkOX: data.homeworkOX,
+                // progress: data.progress
             }
         ))
         lectureNum.current += 1;
@@ -36,26 +46,26 @@ const ChartTable = () => {
             <section className="Chart">
                 <table className="ChartTable">
                     <thead>
-                        <th>회차</th>
-                        <th>수업 일시</th>
+                        <th>클래스 번호</th>
+                        <th>수업 이름</th>
                         <th>학습 내용 및 진도</th>
                         <th>숙제</th>
-                        <th>O, X</th>
-                        <th>수행도</th>
-                        <th>수정</th>
+                        <th>생성 날짜</th>
+                        <th>수정 날짜</th>
+                        <th>작성자</th>
                         <th>삭제</th>
                     </thead>
                     <tbody>
-                        {info.map(({ number, date, contents, homework, homeworkOX, progress }) => (
-                            <tr key={number + date + contents +homework +homeworkOX+ progress}>
-                                <td>{number}</td>
-                                <td>{date}</td>
-                                <td>{contents}</td>
+                        {info.map(({id, title,content, homework, createdAt, updatedAt, user_id }) => (
+                            <tr key={id + title + content + homework + createdAt + updatedAt + user_id}>
+                                <td>{id}</td>
+                                <td>{title}</td>
+                                <td>{content}</td>
                                 <td>{homework}</td>
-                                <td>{homeworkOX}</td>
-                                <td>{progress}</td>
-                                <td><EditIcon/></td>
-                                <td><DeleteIcon onClick = {() => handleRemove()}/></td>
+                                <td>{createdAt}</td>
+                                <td>{updatedAt}</td>
+                                <td>{user_id}</td>
+                                <td><DeleteIcon onClick = {() =>handleRemove({id})}/></td>
                             </tr>
                         ))}
                     </tbody>

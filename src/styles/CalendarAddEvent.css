@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Delius+Unicase&display=swap');
 
+.selectLecture{
+    width: 200px;
+    margin-top: 5px;
+}
+
 .ReactModal__Overlay{
     z-index: 10;
     background-color: rgba(75, 75, 75, 0.173) !important;
@@ -38,11 +43,21 @@
 }
 .UserInput{
     margin-top: 10px;
+    width: 200px;
+    border-radius: 3px;
+    height: 40px;
+    border-color: rgb(216, 216, 216);
+    border: 1px solid #d0d0d0;
+    
 }
+.UserInput:focus {outline: 1px solid #a9dde3;} 
 .closeBtn {
     z-index: 1;
     width: 95px;
     height: 45px;
+    position: relative;
+    margin-top: 20px;
+    margin-left: 50px;
     display: flex;
     border: none;
     border-radius: 20px;
