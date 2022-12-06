@@ -16,6 +16,7 @@ import moment from 'moment';
 import {useNavigate} from "react-router-dom";
 import Modal from 'react-modal';
 import {API_BASE_URL}  from "../api-config.js";
+import {user} from './Mystudents'
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 // export function updateOrDelete(){  
@@ -27,9 +28,7 @@ const ACCESS_TOKEN = "ACCESS_TOKEN";
 //     )
 // }
 
-export default function Calendar() {
-
-
+export default function Calendar(user) {
     const [state, setState] = useState({ eventlist: []});
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
