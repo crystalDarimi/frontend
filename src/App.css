@@ -28,6 +28,29 @@
   color: #61dafb;
 }
 
+.invite-box {
+  width: 400px;
+  height: 300px;
+  background-color: grey;
+  border-radius: 14px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.invite-box .footer {
+  font-weight: 400;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

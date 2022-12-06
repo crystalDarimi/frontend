@@ -24,7 +24,7 @@ const Mystudents = () => {
     }
 
     const deleteLecture = async (lectureCode) => {
-        await call(`/eple/v1/mystudent/${lectureCode}`, "DELETE", users)
+        await call(`/eple/v1/mystudent/${lectureCode}`, "DELETE", lectureCode)
         loadUser()
         
     }
