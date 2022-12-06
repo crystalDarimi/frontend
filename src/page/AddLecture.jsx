@@ -46,10 +46,10 @@ const AddLecture = () => {
 
         return (
             <div>
-            <h1>Mystudents</h1>
+            <p className='mystudentPageName'>Mystudents</p>
                 <div className='AddLecture'>
-                    <form onSubmit={onSubmit}>
-                    <div className="container">
+                    <form className = "mystudentForm" onSubmit={onSubmit}>
+                    <div className="container ">
                         <div className="lectureCode">
                             <label className='label'>과외 코드</label>
                             <input className='inputMystudent' name="lectureCode" type="text" value={lectureCode} onChange={(e)=>onInputChange(e)}/>
@@ -115,7 +115,7 @@ const AddLecture = () => {
                             <input className='inputMystudent' name="schoolAge" value={schoolAge} onChange={(e) => onInputChange(e)} />
                         </div>
                         <div className="btn">
-                            <button type="submit">작성완료</button>
+                            <button className = "submit" type="submit">작성완료</button>
                         </div>
                         </div>
                        

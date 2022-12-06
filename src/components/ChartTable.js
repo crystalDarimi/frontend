@@ -59,7 +59,7 @@ const ChartTable = () => {
         <div className='ProgressChart'>
 
             <div className="PageName PageNameProgressChart">
-                <p>학습 진도표</p>
+                <p>My Class</p>
             </div>
             <section className="Chart">
             <div className="myClassHeader">

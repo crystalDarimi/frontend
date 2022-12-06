@@ -16,7 +16,7 @@ import moment from 'moment';
 import {useNavigate} from "react-router-dom";
 import Modal from 'react-modal';
 import {API_BASE_URL}  from "../api-config.js";
-import {user} from './Mystudents'
+import {user} from './MyStudent'
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 // export function updateOrDelete(){  

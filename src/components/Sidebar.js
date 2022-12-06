@@ -63,7 +63,7 @@ const Sidebar = ({ children, isTeacher }) => {
         {
             name: "My Students",
             icon: <PeopleOutlineIcon />,
-            path: "./mystudent"
+            path: "./mystudents"
         },
         {
             name: "My Class",

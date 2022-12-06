@@ -1,6 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delius+Unicase&display=swap');
 
-
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: medium;
+}
+.mystudentPageName{
+    position: absolute;
+    top: 20px;
+    left: 270px;
+    font-size: 35px;
+    font-weight: 400px;
+    font-family: 'Poppins';
+}
+.mystudentForm{
+    margin-left: 20%;
+}
 .color{
     display: flex;
 }
@@ -18,12 +35,12 @@
     border: 1px solid #D4D4D4;
     border-radius: 4px;
     width: 500px;
-    height: 35px;
-    
+    height: 35px;   
 }
 
 .label{
     display: grid;
+    margin-bottom: 5px;
 }
 
 .AddLecture{
@@ -31,13 +48,13 @@
 }
 
 .submit{
-    background: rgba(212, 212, 212, 0.46);
+    background: rgba(247, 228, 228, 0.46);
     border-radius: 10px;
     border: none;
     width: 120px;
     height: 34px;
     cursor: pointer;
-    font-family: 'Noto Sans', sans-serif;
+    font-family:'Poppins';
     margin-left: 190px;
     margin-top: 15px;
 }

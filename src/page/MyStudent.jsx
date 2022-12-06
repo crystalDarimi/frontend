@@ -36,17 +36,17 @@ const Mystudents = () => {
     return(
        
         <div className="container">
-            <h1>Mystudents</h1>
-            <Link to = '/AddLecture'>
-                <button id="addbtn"><p>+</p>학생 추가하기</button>
+            <p className='mystudentPageName'>My student</p>
+            <Link className="addbtnlink" to = '/AddLecture'>
+                <button id="addbtn"><p className='addbtn'>+</p>학생 추가하기</button>
             </Link>
             <div className="card">
                 <div className="card-title">
                     
                 </div>
                 <div className="card-body">
-                    <table>
-                        <thead>
+                    <table className='mystudentTable'>
+                        <thead className='tablehead'>
                             <tr>
                                 <td>과외코드</td>
                                 <td>이름</td>
@@ -57,7 +57,7 @@ const Mystudents = () => {
                                 <td>수정</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='tablebody'>
                             {
                                 users?.map((data) => (
                                     <tr>

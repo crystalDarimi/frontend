@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import MyStudents from "./page/MyStudent";
 import AddLecture from './page/AddLecture';
 import EditLecture from './page/EditLecture';
+import MyClass from "./page/MyClass";
 
 
 function Copyright() {
