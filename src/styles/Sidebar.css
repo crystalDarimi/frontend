@@ -59,9 +59,9 @@ main {
     padding: 7px 15px;
     font-size: 14px;
     font-family: 'Poppins';
-    font-weight: 600;
+    font-weight: 600px;
     gap: 20px;
-    width: 150px;
+    width: 180px;
     padding-top: 15px;
     margin: 5px 12px 5px 12px;
 }
@@ -72,7 +72,7 @@ main {
     border-radius: 16px;
     height: auto;
     color: rgba(29, 137, 147, 1);
-    width: 150px;
+    width: 180px;
 }
 
 .icon {

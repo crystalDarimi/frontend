@@ -74,3 +74,11 @@ function Login(){
 }
 
 export default Login;
+
+//mystudent 삭제, 수정 긴ㅇ, (진도 그래프, 프로필)
+//aws 데이터 연결
+
+
+// 회원가입에 선생님 학생 선택 체크박스
+//role로 값이 들어감.
+//progress차트 캘린더에 연결 - 옆에 뜨게 하기.

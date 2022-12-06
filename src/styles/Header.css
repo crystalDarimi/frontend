@@ -8,6 +8,10 @@ header {
     border-color: #EEEEEE;
 }
 
+.signout{
+    margin-right: 50px;
+}
+
 nav ul li {
     color: #a2a3a5;
     float: right;

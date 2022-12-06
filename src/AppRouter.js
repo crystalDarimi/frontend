@@ -9,13 +9,14 @@ import Calendar from "./page/Calendar";
 import './components/Sidebar';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-import MyStudents from "./page/MyStudent";
-import AddLecture from './page/AddLecture';
+import MyClass from "./page/MyClass";
+import Mystudents from "./page/Mystudents";
+import AddLecture from "./page/AddLecture";
 
 
 function Copyright(){
     return(
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography  variant="body2" color="textSecondary" align="center">
             {"Copyright © "}
             crystal darimi, {new Date().getFullYear()}
             {"."}
@@ -28,20 +29,25 @@ const AppRouter=() =>{
             <BrowserRouter>
                 {<Header />}
                 <Sidebar>
+                    <section>
                 <Routes>
                     <Route path ="/login" element = {<Login/>}/>
                     <Route path ="/" element = {<App /> }/>
                     <Route path = "/signup" element = {<Signup/> }/>
                     <Route path="/calendar" element={<Calendar/>}/>
-                    <Route path="/mystudents" element={<MyStudents/>}/>
+                    <Route path="/mystudent" element={<Mystudents/>}/>
+                    <Route path="/myclass" element={<MyClass/>}/>
                     <Route path="/AddLecture" element={<AddLecture />}/>
 
                 </Routes>
+                </section>
                 </Sidebar>
             </BrowserRouter>
-            <Box mt ={5}>
+            <footer>
+            <Box mt ={5} className="copyright">
                 <Copyright />
              </Box>
+             </footer>
         </div>
     );
 };
