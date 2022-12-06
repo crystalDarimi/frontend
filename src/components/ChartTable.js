@@ -12,6 +12,12 @@ const ChartTable = () => {
     const handleRemove = ({id}) => {
         const newInfo = info.filter((data) => data.id !== id)
         setInfo(newInfo);
+        for ( let i = 0; i < info.length; i++) 
+            {
+                if(info[i].id >= id){
+                    info[i].id--;
+                }
+            }
     }
 
     
