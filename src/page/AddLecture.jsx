@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/AddLecture.css'
 // import Header from './../components/Header';
-import axios from 'axios';
 import {useNavigate} from "react-router-dom";
 import { call } from "../service/ApiService";
 
@@ -24,7 +23,9 @@ const AddLecture = () => {
             stdNumber:"",
             momNumber:"",
             schoolAge:""
-        })
+        });
+        const [inviteCode, setInviteCode] = useState(null);
+        const [isOpenForModal, setIsOpenForModal] = useState(false);
 
         const{lectureCode, lectureTitle, color, cycle, fee, minutesPerOnce, dayOne, dayTwo, stdNumber, momNumber, schoolAge, stdName} = user
 
@@ -36,17 +37,18 @@ const AddLecture = () => {
             setUser({...user, color: value })
         }
 
-        const onSubmit= async(e)=>{
-            e.preventDefault()
-            await call("/eple/v1/mystudent/lecture", "POST", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
-            console.log(e)
-            navigate('/mystudents')
+        const onSubmit= async (e) =>{
+            e.preventDefault();
+            const res = await call("/eple/v1/mystudent/lecture", "POST", user); // call함수에 url 담겨져 있어서 그냥 불러오기만 하면됌
+            setInviteCode(res);
+            setIsOpenForModal(true);
         }
 
         return (
-            <form className = "formMystudent" onSubmit={onSubmit}>
-                <h1 className='myStudents'>Mystudents</h1>
+            <div>
+            <h1>Mystudents</h1>
                 <div className='AddLecture'>
+                    <form onSubmit={onSubmit}>
                     <div className="container">
                         <div className="lectureCode">
                             <label className='label'>과외 코드</label>
@@ -117,8 +119,23 @@ const AddLecture = () => {
                         </div>
                         </div>
                        
-                </div>
             </form>
+                </div>
+                {isOpenForModal ? (
+                <div className='invite-box'>
+                    <div>
+                        초대링크
+                    </div>
+                    <div>
+                    {inviteCode}
+                    </div>
+                    <div className='footer'>
+                        <a onClick={() => navigate('/mystudents')}>목록으로 가기</a>
+                    </div>
+                </div>
+                )
+                : <></>}
+            </div>
     );
 }
 

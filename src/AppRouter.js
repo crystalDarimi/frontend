@@ -9,9 +9,9 @@ import Calendar from "./page/Calendar";
 import './components/Sidebar';
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
-import MyClass from "./page/MyClass";
-import Mystudents from "./page/Mystudents";
-import AddLecture from "./page/AddLecture";
+import MyStudents from "./page/MyStudent";
+import AddLecture from './page/AddLecture';
+import EditLecture from './page/EditLecture';
 
 
 function Copyright() {
@@ -38,19 +38,16 @@ const AppRouter = () => {
         <div>
             <BrowserRouter>
                 {<Header />}
-                <Sidebar isTeacher={async () => {await giveTeacher}}>
-                    <section>
-                        <Routes>
-                            <Route path="/login" element={<Login />} />
-                            <Route path="/" element={<App />} />
-                            <Route path="/signup" element={<Signup teacherTrue={teacherTrue} />} />
-                            <Route path="/calendar" element={<Calendar />} />
-                            <Route path="/mystudent" element={<Mystudents />} />
-                            <Route path="/myclass" element={<MyClass />} />
-                            <Route path="/AddLecture" element={<AddLecture />} />
-
-                        </Routes>
-                    </section>
+                <Sidebar>
+                <Routes>
+                    <Route path ="/login" element = {<Login/>}/>
+                    <Route path ="/" element = {<App /> }/>
+                    <Route path = "/signup" element = {<Signup/> }/>
+                    <Route path="/calendar" element={<Calendar/>}/>
+                    <Route path="/mystudents" element={<MyStudents/>}/>
+                    <Route path="/AddLecture" element={<AddLecture />}/>
+                    <Route path="/EditLecture/:id" element={<EditLecture />}/>
+                </Routes>
                 </Sidebar>
             </BrowserRouter>
             <footer>
