@@ -8,7 +8,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { Link, NavLink } from 'react-router-dom';
 
 const Sidebar = ({ children, isTeacher }) => {
-    /* function differMenu() {
+    function differMenu() {
         if (isTeacher) {
             return (
                 <div>
@@ -37,7 +37,7 @@ const Sidebar = ({ children, isTeacher }) => {
                 </div>
             )
         }
-    } */
+    }
 
     const menuItem = [
         // {
@@ -82,15 +82,15 @@ const Sidebar = ({ children, isTeacher }) => {
                 <div className="mainmenu">
                     <h6>Main Menu</h6>
                 </div>
-                {/* {differMenu()} */}
-                {
+                {differMenu()}
+                {/* {
                     menuItem.map((item, index) => (
                         <NavLink to = {item.path} key={index} className="link" activeclassName="active">
                             <div className="icon">{item.icon}</div>
                             <div className="link_text">{item.name}</div>
                         </NavLink>
                     ))
-                }
+                } */}
             </div>
             <main className="pagetitle">{children}</main>
         </div>
