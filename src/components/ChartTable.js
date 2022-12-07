@@ -36,14 +36,14 @@ const ChartTable = () => {
 
     }
 
-    // useEffect(()=>{
-    //     loadLectures();
-    // },[]);
+    useEffect(()=>{
+        loadInfo();
+    },[]);
 
-    // const loadLectures =  async() => {
-    //     const result = await call("/eple/v1/myclass");
-    //     setLectures(result.data);
-    // }
+    const loadInfo =  async() => {
+        const result = await call("/eple/v1/myclass");
+        setInfo(result.data);
+    }
 
     function showButton(){
         if(localStorage.getItem("role") === TEACHER){
