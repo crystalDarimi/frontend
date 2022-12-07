@@ -24,6 +24,7 @@ const ChartTable = () => {
 
     const handleRemove = ({ id }) => {
         const newInfo = info.filter((data) => data.id !== id)
+        call("/eple/v1/calender/myclass", "DELETE", id)
         setInfo(newInfo);
         let i = 0;
         for (; i < info.length; i++) {
@@ -32,6 +33,7 @@ const ChartTable = () => {
             }
         }
         lectureNum.current = i;
+
     }
 
     // useEffect(()=>{
@@ -70,7 +72,7 @@ const ChartTable = () => {
         ))
         lectureNum.current += 1;
         console.log()
-        //await call("/eple/v1/calender/myclass", "POST", info);
+        await call("/eple/v1/calender/myclass", "POST", info);
 
 
     }
