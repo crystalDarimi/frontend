@@ -25,9 +25,8 @@ export default function AddChart({ isOpen, onClose, onChartAdded}) {
             homework,
             // createdAt,
             // updatedAt,
-            user_id
+            //user_id
         })
-
         onClose();
     }
     //if문으로 일정 과외 나누기
@@ -59,10 +58,10 @@ export default function AddChart({ isOpen, onClose, onChartAdded}) {
                             <label className="text homework">숙제</label><p/>
                             <textarea className="UserInputMyClass homework" value={homework} onChange={(e) => setHomework(e.target.value)} />
                         </div>
-                        <div>
+                        {/* <div>
                             <label className="text user_id">작성자</label><p/>
                             <textarea className="UserInputMyClass user_id" value={user_id} onChange={(e) => setUser_id(e.target.value)}/>
-                        </div>
+                        </div> */}
 
                         <div>
                             <button type="submit" className="closeBtnMyClass" /*  onClick={() => closeModal(false)} */>저장하기</button>

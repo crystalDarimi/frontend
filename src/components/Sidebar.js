@@ -14,25 +14,23 @@ const Sidebar = ({ children, isTeacher }) => {
         if (localStorage.getItem("role") === TEACHER) {
             return (
                 <div>
-                    <NavLink to={menuItem[0].path} className="link" activeclassName="active">
-                        <div className="icon">{menuItem[0].icon}</div>
-                        <div className="link_text">{menuItem[0].name}</div>
-                    </NavLink>
-                    <NavLink to={menuItem[1].path} className="link" activeclassName="active">
-                        <div className="icon">{menuItem[1].icon}</div>
-                        <div className="link_text">{menuItem[1].name}</div>
-                    </NavLink>
+                    {menuItem.map((item, index) => (
+                        <NavLink to = {item.path} key={index} className="link">
+                            <div className="icon">{item.icon}</div>
+                            <div className="link_text">{item.name}</div>
+                        </NavLink>
+                    ))}
                 </div>
             )
         }
         else{
             return(
                 <div>
-                    <NavLink to={menuItem[0].path} className="link" activeclassName="active">
+                    <NavLink to={menuItem[0].path} className="link">
                         <div className="icon">{menuItem[0].icon}</div>
                         <div className="link_text">{menuItem[0].name}</div>
                     </NavLink>
-                    <NavLink to={menuItem[2].path} className="link" activeclassName="active">
+                    <NavLink to={menuItem[2].path} className="link">
                         <div className="icon">{menuItem[2].icon}</div>
                         <div className="link_text">{menuItem[2].name}</div>
                     </NavLink>

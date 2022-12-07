@@ -65,7 +65,8 @@ export const signin = (userDTO) => {
                     role: response.role,
                     username: response.username,
                 });
-                localStorage.setItem("role", response.role)
+                localStorage.setItem("role", response.role);
+                localStorage.setItem("username", response.username);
                 //token이 존재하는 경우 lecture 화면으로 redirect
                 window.location.href = "/";
             }
