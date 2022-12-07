@@ -16,7 +16,6 @@ import moment from 'moment';
 import {useNavigate} from "react-router-dom";
 import Modal from 'react-modal';
 import {API_BASE_URL}  from "../api-config.js";
-import {user} from './MyStudent'
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 
 // export function updateOrDelete(){  
@@ -27,49 +26,57 @@ const ACCESS_TOKEN = "ACCESS_TOKEN";
 //             </div>
 //     )
 // }
+//무시하셔도 좋습니다... 삭제 수정 시도해본 것입니다..
 
 export default function Calendar(user) {
     const [state, setState] = useState({ eventlist: []});
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
-    const [openUD, setOpenUD] = useState(false);
-    const [addedevent, setAddedevent] = useState({
-       title: "",
+    const [addedData, setAddedData] = useState({
+        lectureTitle: "", //fullcalendar쪽에서 받는 객체 속성값 이름을 title로 맞추어주어야해서 백엔드에서 받아온 lectureTitle 값을 여기 저장해서 이걸 fullcalendar에 저장할 것입니다!
+        start:  "",
+        end: "",
+    });
+    const [addedCalendar, setAddedCalendar] = useState({
+        title: "", //fullcalendar쪽에서 받는 객체 속성값 이름을 title로 맞추어주어야해서 백엔드에서 받아온 lectureTitle 값을 여기 저장해서 이걸 fullcalendar에 저장할 것입니다!
         start:  "",
         end: "",
     });
 
-    // useEffect(() => {
-    //     call("/eple/v1/calendar/schedule", "GET", null).then((response) =>{
-    //         setState({items: response.data});
-    //     });
-    // }, []);
-    
 
-    const onEventAdded = (added) => {
+    async function onEventAdded(added){
         let calendarApi = calendarRef.current.getApi();
-        calendarApi.addEvent(added);
+        await calendarApi.addEvent(added);
     };
 
 
-    function addEventData(){
+    function addEventData(added){
         const thisEvents = state.eventlist;
-        thisEvents.push(addedevent); // 배열에 아이템 추가
+        thisEvents.push(added); // 배열에 아이템 추가
         setState({ eventlist: thisEvents }); // 업데이트는 반드시 this.setState로 해야됨.
         console.log("events : ", state.eventlist);
-        console.log(addedevent)
-        
-        
+        console.log(added);    
     }
-    function handleDataName(event){
+
+    function handleDataName(added){ //이 함수가 lectureTitle을 title로 바꾸고 date 포멧도 맞춰주는 함수입니다.
+
+        //첫번째는 fullcalendar에 들어가는 lectureTitle을 title로 변경한 것입니다.
         //const thisEvents = state.eventlist;
-        addedevent.title = event.title;
-         addedevent.start = moment(event.start).format("yyyy-MM-dd HH:mm");
-        addedevent.end = moment(event.end).format("yyyy-MM-dd HH:mm");
+        addedCalendar.title = added.lectureTitle.value;
+        addedCalendar.start = added.start;
+        addedCalendar.end = added.end;
+
+        //두번째는 post시에 들어갈 날짜는 백엔드에서 설정한 포멧으로 맞추는 코드입니다.
+        addedData.lectureTitle = added.lectureTitle.value;
+        addedData.start = moment(added.start).format("yyyy-MM-dd HH:mm");
+        addedData.end = moment(added.end).format("yyyy-MM-dd HH:mm");
+
+        onEventAdded(addedCalendar);   
+        addEventData(addedData);
         // addedevent.scheduleId = "ID-" + thisEvents.length;
-         call("/eple/v1/calendar/schedule", "POST", addedevent)
-        }
+        call("/eple/v1/calendar/schedule", "POST", addedData);
+    }
     
     
     const [hoverBtn, setHover] = useState(false);
@@ -114,15 +121,14 @@ export default function Calendar(user) {
                         //날짜 클릭하면 발생하는 이벤트 설정 가능
                       }}
                     eventClick = {function(info) {//이벤트 클릭하면 삭제 알림창 뜨고 확인 누르면 삭제
-                        /* { <div className='updateOrDeleteButtons'>
+                        if(window.confirm("일정을 삭제하시겠습니까?")){
+                            info.event.remove();
+                        }
+                        //삭제는 구현해놓았습니다.
+                    /* { <div className='updateOrDeleteButtons'>
                         <button className='Update'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 수정하기</button>
                         <button className='Delete'>삭제하기</button>
                     </div>} 수정 추가해서 진행 중인 부분으로 일단을 무시하셔도 됩니다! */
-                      
-                    if(window.confirm("일정을 삭제하시겠습니까?")){
-                        info.event.remove();
-                    }
-                        //delete event from calender
                     }}                    
                     
                 />
@@ -134,7 +140,7 @@ export default function Calendar(user) {
                     </div> 
                 </button>
                 {hoverBtn && <div className='hoverButtons'>
-                    <button className='schedule'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 추가</button>
+                    {/*<button className='schedule'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 추가</button>*/}
                     <button className='lecture'onMouseEnter={openMouseHover} onMouseLeave={closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(true)}}>과외 추가</button>
                     </div>}
                 </div>
@@ -154,7 +160,7 @@ export default function Calendar(user) {
             isLecture = {isLecture} 
             isOpen = {modalOpen} 
             onClose = {()=> setModalOpen(false)} 
-            onEventAdded={(added) => {onEventAdded(added); handleDataName(added); addEventData(added)}}
+            onEventAdded={(added) => { handleDataName(added); }}
             
             />
 

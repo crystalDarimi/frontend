@@ -1,64 +1,60 @@
 import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 /* import Datetime from 'react-datetime'; */
-import { setExtendedProp } from '@fullcalendar/react'
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/CalendarAddEvent.css'
 import Modal from 'react-modal';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import {call,signout} from "../../service/ApiService";
-import { TextField } from "@mui/material";
 
 
-export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded, changeName }/* { isOpen, onClose, onEventAdded } */) {
-    const [title, setTitle] = useState("");
+export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded }/* { isOpen, onClose, onEventAdded } */) {
+    //const [title, setTitle] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
-    const [lectureEntity, setLectureEntity] = useState(null);
-    const [users, setUsers] = useState([]);
+    const [lectureTitle, setLectureTitle] = useState(""); // lectureList에서 선택된 lectureTitle
+    const [lectureList, setLectureList] = useState([]); //string list 형태로 받아올 lectureTitle들..
+    //const [users, setUsers] = useState([]);
     
 
+    //lecturelist 넣을 lecture들을 불러오기
     useEffect(()=>{
-        loadUser();
+        loadLecture();
     },[]);
 
-    const loadUser =  async() => {
-        const result = await call("/eple/v1/mystudent/lecture");
-        setUsers(result.data);
-        console.log(users)
+    const loadLecture =  async() => {
+        const result = await call("/eple/v1/mystudent/lecture"); //아마 이 부분에 그 lectureTitle url이 들어가면 될 것 같습니다!
+        setLectureList(result.data);
+        console.log(lectureTitle)
     }
-    //lectureEntity... 값을 select 하기.
+    
 
-    //dropbar에 들어가는 임시값입니다! 지우셔도 됩니다.
+
+    //연동 전 dropbar에 들어가는 임시값입니다! 지우셔도 됩니다.
     const options = [
         'one', 'two', 'three'
     ]
-    const defaultOption = users[0];
+    const defaultOption = lectureList[0];
 
 
     const onSubmit = (event) => {
         event.preventDefault();
         onEventAdded({
-            title,
+            //title,
+            lectureTitle,
             start,
-            end,
-            lectureEntity
+            end,          
         })
         onClose();
-        // changeName({
-        //     lectureTitle: {title},
-        //     start: {start.toIS}
-
-        // })
     }
-    //if문으로 일정 과외 나누기
 
     return (
 
         <div className="addEvntBase">
 
             <Modal appElement={document.getElementById('app')} ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} className="addEvntModal">
+                {/*일정버튼은 잠시 주석처리 했습니다. */}
                 {/* {!isLecture && <form onSubmit={onSubmit} className="addEvntForm">
 
                     <div className="addEvntFormInsider">
@@ -89,12 +85,14 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
                     <div className="addEvntFormInsider">
                         <div>
                             <label className="text dropdown">과외 선택</label>
-                            <Dropdown className = "selectLecture" options={users} onChange={(lecture) => setLectureEntity(lecture)} value={defaultOption} placeholder="Select an option"  />
+                            {/*<Dropdown className = "selectLecture" options={lectureList} onChange={(lecture) => setLectureTitle(lecture)} value={defaultOption} placeholder="Select an option"  /> */}
+                            {/* 아래 임시를 지우고 이런식으로 {options}에 과외 리스트 값을 넣으면 될 것 같습니다.*/}
+                            <Dropdown className = "selectLecture" options={options} onChange={(lecture) => setLectureTitle(lecture)} value={defaultOption} placeholder="Select an option"  />
                         </div>
-                        <div>
+                        {/* <div>
                             <label className="text eventTitle">과외 제목</label><br></br>
                             <input className="UserInput inputTitle" placeholder="일정 제목" value={title} name="LectureTitle" onChange={(e) => setTitle(e.target.value)} />
-                        </div>
+                        </div> */}
 
                         <div>
                             <label className="text eventStart">과외 시작</label>
