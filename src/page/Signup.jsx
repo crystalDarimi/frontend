@@ -4,7 +4,7 @@ import {signup} from "../service/ApiService";
 import '../styles/Signup.css';
 
 
-const Signup = ({teacherTrue}) =>{
+const Signup = () =>{
     const [isTeacher, setisTeacher] = useState();
 
     const handleSubmit = async (event) =>{
@@ -34,11 +34,9 @@ const Signup = ({teacherTrue}) =>{
         if(data === "teacher")
         {
             setisTeacher(true);
-            teacherTrue(isTeacher);
         }
         else{
             setisTeacher(false);
-            teacherTrue(isTeacher);
         }
     }
 

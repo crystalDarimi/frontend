@@ -4,7 +4,7 @@ import {signin} from "../service/ApiService";
 
 
 
-function Login({teacherTrue}){
+function Login(){
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
@@ -14,7 +14,6 @@ function Login({teacherTrue}){
 
         //apiService의 signin 메서드를 사용해 로그인
         signin({ email: email, password: password });
-        teacherTrue(signin.userRole)
     };
 
     return(

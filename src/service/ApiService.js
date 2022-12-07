@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {API_BASE_URL}  from "../api-config";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 const USER_INFO = "USER_INFO";
@@ -52,7 +51,6 @@ export const call =  (api, method, request) => {
 
 
 export const signin = (userDTO) => {
-    let userRole;
     return call("/eple/v1/auth/signin","POST",userDTO)
         .then((response)=>{
             if(response.token){
@@ -64,7 +62,7 @@ export const signin = (userDTO) => {
                     role: response.role,
                     username: response.username,
                   });
-                  userRole = response.role;
+
                 //token이 존재하는 경우 lecture 화면으로 redirect
                 window.location.href = "/";
             }
