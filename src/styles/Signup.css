@@ -1,4 +1,4 @@
-.SignupFormTag {
+/* .SignupFormTag {
     position: relative;
     margin-top: 100px;
     margin-left: 200px;
@@ -17,4 +17,74 @@
     background-color: white;
     width: 100%;
     height: 100%;
+} */
+
+
+.password{
+    font-size: 18px;
+}
+
+.checkbox{
+    font-size: 18px;
+}
+
+.username{
+    font-size: 18px;
+
+}
+
+
+#email{
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    width: 600px;
+    height: 50px;   
+    font-size: 18px;
+    
+}
+
+#username{
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    width: 600px;
+    height: 50px;  
+}
+
+#inviteToken{
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    width: 600px;
+    height: 50px; 
+}
+
+#password{
+    border: 1px solid #D4D4D4;
+    border-radius: 4px;
+    width: 600px;
+    height: 50px;
+}
+
+#check1{
+    width: 15px;
+    height: 15px;
+}
+
+#check2{
+    width: 15px;
+    height: 15px;
+}
+
+
+
+#submit{
+    background: rgba(247, 228, 228, 0.46);
+    border-radius: 10px;
+    border: none;
+    width: 120px;
+    height: 50px;
+    cursor: pointer;
+    font-family:'Poppins';
+    margin-left: 190px;
+    font-size: 18px;
+    margin-top: 15px;
 }
