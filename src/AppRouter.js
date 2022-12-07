@@ -25,15 +25,15 @@ function Copyright() {
     );
 }
 const AppRouter = () => {
-    // const [teacher, setTeacher] = useState(false);
-    // let isTeacher;
-    // function teacherTrue() {
-    //     setTeacher(true);
-    // }
-    // function giveTeacher(){
-    //     isTeacher = teacher;
-    //     return isTeacher;
-    // }
+    const [teacher, setTeacher] = useState(false);
+    let isTeacher;
+    function teacherTrue() {
+        setTeacher(true);
+    }
+    function giveTeacher(){
+        isTeacher = teacher;
+        return isTeacher;
+    }
 
     return (
         <div>
@@ -42,7 +42,7 @@ const AppRouter = () => {
                 <Sidebar /* isTeacher={async () => {await giveTeacher}} */>
                     <section>
                         <Routes>
-                            <Route path="/login" element={<Login />} />
+                            <Route path="/login" element={<Login isTeacher = {(isTeacher) => setTeacher(isTeacher)}/>} />
                             <Route path="/" element={<App />} />
                             <Route path="/signup" element={<Signup /* teacherTrue={teacherTrue} */ />} />
                             <Route path="/calendar" element={<Calendar />} />

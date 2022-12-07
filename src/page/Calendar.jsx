@@ -34,7 +34,7 @@ export default function Calendar(user) {
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
     const [addedData, setAddedData] = useState({
-        lectureTitle: "", //fullcalendar쪽에서 받는 객체 속성값 이름을 title로 맞추어주어야해서 백엔드에서 받아온 lectureTitle 값을 여기 저장해서 이걸 fullcalendar에 저장할 것입니다!
+        lectureTitle: "", //백엔드쪽에서 받는 객체 날짜 포멧을 맞춰서 저장할 것입니다!
         start:  "",
         end: "",
     });

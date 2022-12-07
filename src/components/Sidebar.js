@@ -6,10 +6,12 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { Link, NavLink } from 'react-router-dom';
+import { } from "../service/ApiService"; 
+const TEACHER = "TEACHER";
 
 const Sidebar = ({ children, isTeacher }) => {
-    /* function differMenu() {
-        if (isTeacher) {
+    function differMenu() {
+        if (localStorage.getItem("role") === TEACHER) {
             return (
                 <div>
                     <NavLink to={menuItem[0].path} className="link" activeclassName="active">
@@ -37,7 +39,7 @@ const Sidebar = ({ children, isTeacher }) => {
                 </div>
             )
         }
-    } */
+    }
 
     const menuItem = [
         // {
@@ -82,15 +84,15 @@ const Sidebar = ({ children, isTeacher }) => {
                 <div className="mainmenu">
                     <h6>Main Menu</h6>
                 </div>
-                {/* {differMenu()} */}
-                {
+                {differMenu()}
+                {/* {
                     menuItem.map((item, index) => (
                         <NavLink to = {item.path} key={index} className="link" activeclassName="active">
                             <div className="icon">{item.icon}</div>
                             <div className="link_text">{item.name}</div>
                         </NavLink>
                     ))
-                }
+                } */}
             </div>
             <main className="pagetitle">{children}</main>
         </div>
