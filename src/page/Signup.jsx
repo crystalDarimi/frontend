@@ -1,5 +1,4 @@
 import React,{useState} from "react";
-import {Container, Grid, Typography, TextField, Button,Link }  from "@mui/material";
 import {signup} from "../service/ApiService";
 import '../styles/Signup.css';
 
@@ -15,7 +14,7 @@ const Signup = () =>{
         const username = data.get("username");
         const inviteToken = data.get("inviteToken");
 
-        const formData = {
+        const formData = { 
             email,
             password,
             isTeacher,
@@ -30,7 +29,7 @@ const Signup = () =>{
         window.location.href = "/login";
     };
 
-    const handleChange = (data) => {
+    const handleChange = (data) => { // checkbox가 teacher이면 true, student면 false로 반환
         if(data === "teacher")
         {
             setisTeacher(true);
@@ -44,31 +43,32 @@ const Signup = () =>{
     return (
         <form onSubmit={handleSubmit}>
         <div class="container">
+            <h1>회원가입</h1>
             <div className="email">
                 <label>이메일</label>
-                <input name="email" type="email"/>
+                <input name="email" id = "email" type="email"/>
             </div>
             <div className="password">
                 <label>패스워드</label>
-                <input name="password" type="password" />
+                <input name="password" id='password' type="password" />
             </div>
             <div className="checkbox">
                 <label>선생님</label>
-                <input name="isTeacher" type="checkbox" value={isTeacher} onChange={()=> handleChange("teacher")} />
+                <input name="isTeacher" id='check1'type="checkbox" value={isTeacher} onChange={()=> handleChange("teacher")} />
                 <label>학생</label>
-                <input name="is" type="checkbox" value={isTeacher} onChange={()=> handleChange("student")}  />
+                <input name="is" type="checkbox" id='check2' value={isTeacher} onChange={()=> handleChange("student")}  />
             </div>
             <div className="username">
                 <label>학생일 경우 초대코드 입력</label>
-                <input name="inviteToken" type="text" disabled={isTeacher !== false} />
+                <input name="inviteToken" id="inviteToken" type="text" disabled={isTeacher !== false} /> {/*학생일 경우에만 입력할 수 있도록 설정*/}
             </div>
             <div className="username">
                 <label>사용자 이름</label>
-                <input name="username" type="username" />
+                <input name="username" id='username' type="username" />
             </div>
-            <div className="submit">
-                <button type="submit">회원 등록</button>
-            </div>
+           
+                <button type="submit" name='submit' id='submit'>회원 등록</button>
+           
         </div>
         </form>
     )

@@ -22,6 +22,7 @@ margin-right: 30%;
     display: flex;
     padding-left: 20px;
     padding-top: 13px;
+    cursor: pointer;
 }
 .addbtn{
     color: #00A8C6;
@@ -29,6 +30,7 @@ margin-right: 30%;
     margin-top: -9px;
     margin-left: -5px;
     margin-right: 5px;
+    cursor: pointer;
 
 }
 .mystudentTable{
@@ -38,8 +40,13 @@ margin-right: 30%;
     font-size:medium;
     border-left: none;
 }
-.tablebody tr td{
-
+.edit{
+    width:40px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    border: 1px solid #D4D4D4;
+    cursor: pointer;
 }
 
 /* .container {
