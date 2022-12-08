@@ -10,7 +10,7 @@ import {call,signout} from "../../service/ApiService";
 
 
 export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded }/* { isOpen, onClose, onEventAdded } */) {
-    //const [title, setTitle] = useState("");
+    const [title, setTitle] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
     const [lectureTitle, setLectureTitle] = useState(""); // lectureList에서 선택된 lectureTitle
@@ -41,7 +41,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
     const onSubmit = (event) => {
         event.preventDefault();
         onEventAdded({
-            //title,
+            title,
             lectureTitle,
             start,
             end,          
@@ -55,12 +55,12 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
 
             <Modal appElement={document.getElementById('app')} ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} className="addEvntModal">
                 {/*일정버튼은 잠시 주석처리 했습니다. */}
-                {/* {!isLecture && <form onSubmit={onSubmit} className="addEvntForm">
+                {!isLecture && <form onSubmit={onSubmit} className="addEvntForm">
 
                     <div className="addEvntFormInsider">
                         <div>
                             <label className="text eventTitle">일정 제목</label><br></br>
-                            <input className="UserInput inputTitle" placeholder="일정 제목" value={title} name = "LecturTitle" onChange={(e) => setTitle(e.target.value)} />
+                            <input className="UserInput inputTitle" placeholder="일정 제목" value={lectureTitle} name = "LecturTitle" onChange={(e) => setLectureTitle(e.target.value)} />
                         </div>
 
                         <div>
@@ -80,7 +80,7 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
                     </div>
 
 
-                </form>} */}
+                </form>}
                 {isLecture && <form onSubmit={onSubmit} className="addEvntForm">
                     <div className="addEvntFormInsider">
                         <div>

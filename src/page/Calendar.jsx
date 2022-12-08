@@ -34,7 +34,7 @@ export default function Calendar(user) {
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
     const [addedData, setAddedData] = useState({
-        lectureTitle: "", //fullcalendar쪽에서 받는 객체 속성값 이름을 title로 맞추어주어야해서 백엔드에서 받아온 lectureTitle 값을 여기 저장해서 이걸 fullcalendar에 저장할 것입니다!
+        lectureTitle: "", //백엔드쪽에서 받는 객체 날짜 포멧을 맞춰서 저장할 것입니다!
         start:  "",
         end: "",
     });
@@ -63,12 +63,12 @@ export default function Calendar(user) {
 
         //첫번째는 fullcalendar에 들어가는 lectureTitle을 title로 변경한 것입니다.
         //const thisEvents = state.eventlist;
-        addedCalendar.title = added.lectureTitle.value;
+        addedCalendar.title = added.lectureTitle;
         addedCalendar.start = added.start;
         addedCalendar.end = added.end;
 
         //두번째는 post시에 들어갈 날짜는 백엔드에서 설정한 포멧으로 맞추는 코드입니다.
-        addedData.lectureTitle = added.lectureTitle.value;
+        addedData.lectureTitle = added.lectureTitle;
         addedData.start = moment(added.start).format("yyyy-MM-dd HH:mm");
         addedData.end = moment(added.end).format("yyyy-MM-dd HH:mm");
 
@@ -140,7 +140,7 @@ export default function Calendar(user) {
                     </div> 
                 </button>
                 {hoverBtn && <div className='hoverButtons'>
-                    {/*<button className='schedule'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 추가</button>*/}
+                    <button className='schedule'onMouseEnter={openMouseHover} onMouseLeave= {closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(false)}}>일정 추가</button>
                     <button className='lecture'onMouseEnter={openMouseHover} onMouseLeave={closeMouseHover} onClick={()=> {setModalOpen(true); setIsLecture(true)}}>과외 추가</button>
                     </div>}
                 </div>

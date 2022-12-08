@@ -52,7 +52,6 @@
 }
 .UserInput:focus {outline: 1px solid #a9dde3;} 
 .closeBtn {
-    z-index: 1;
     width: 95px;
     height: 45px;
     position: relative;

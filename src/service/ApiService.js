@@ -1,18 +1,21 @@
-import {API_BASE_URL}  from "../api-config";
+import {useState} from "react";
+import { API_BASE_URL } from "../api-config";
 const ACCESS_TOKEN = "ACCESS_TOKEN";
 const USER_INFO = "USER_INFO";
+const TEACHER = "TEACHER";
 
 
 
-export const call =  (api, method, request) => {
+
+export const call = (api, method, request) => {
     let headers = new Headers({
         "Content-Type": "application/json",
     });
 
     //로컬 스토리지에서 ACESS TOKEN 가져오기
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
-    if(accessToken && accessToken !== null){
-        headers.append("Authorization","Bearer "+accessToken);
+    if (accessToken && accessToken !== null) {
+        headers.append("Authorization", "Bearer " + accessToken);
     }
 
     let options = {
@@ -49,20 +52,21 @@ export const call =  (api, method, request) => {
         });
 }
 
-
 export const signin = (userDTO) => {
-    return call("/eple/v1/auth/signin","POST",userDTO)
-        .then((response)=>{
-            if(response.token){
+    call("/eple/v1/auth/signin", "POST", userDTO)
+        .then((response) => {
+
+            if (response.token) {
                 //로컬 스토리지에 토큰 저장
-                localStorage.setItem(ACCESS_TOKEN,response.token);
+                localStorage.setItem(ACCESS_TOKEN, response.token);
                 localStorage.setItem(USER_INFO, {
                     email: response.email,
                     id: response.id,
                     role: response.role,
                     username: response.username,
-                  });
-
+                });
+                localStorage.setItem("role", response.role);
+                localStorage.setItem("username", response.username);
                 //token이 존재하는 경우 lecture 화면으로 redirect
                 window.location.href = "/";
             }
@@ -75,7 +79,7 @@ export const signout = () => {
 }
 
 export const signup = (userDTO) => {
-    return call("/eple/v1/auth/signup","POST",userDTO);
+    return call("/eple/v1/auth/signup", "POST", userDTO);
 }
 
 export const getMe = () => { // 사용자 정보 확인

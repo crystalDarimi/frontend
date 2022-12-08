@@ -4,15 +4,18 @@ import {signin} from "../service/ApiService";
 
 
 
+
 function Login(){
+    const [teacher, setTeacher] = useState(false);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
         //const username = data.get("username");
         const email = data.get("email");
         const password = data.get("password");
+    
 
-        //apiService의 signin 메서드를 사용해 로그인
+        //apiService의 signin 메서드를 사용해 로그인9
         signin({ email: email, password: password });
     };
 
