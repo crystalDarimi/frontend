@@ -4,7 +4,8 @@ import FullCalendar, { EventClickArg, EventContentArg } from '@fullcalendar/reac
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import timeGridPlugin from '@fullcalendar/timegrid';
-import '../../node_modules/@fullcalendar/common/main.css';
+
+//import '@fullcalendar/common/main.css';
 //import listPlugin from '@fullcalendar/list';
 import AddIcon from '@mui/icons-material/Add';
 //import axios from 'axios';
