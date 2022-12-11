@@ -114,10 +114,10 @@ async function titleList(data){
                             {/*<Dropdown className = "selectLecture" options={lectureList} onChange={(lecture) => setLectureTitle(lecture)} value={defaultOption} placeholder="Select an option"  /> */}
                             {/* 아래 임시를 지우고 이런식으로 {options}에 과외 리스트 값을 넣으면 될 것 같습니다.*/}
                             {/* <Dropdown className = "selectLecture" options={lectures} onChange={(select) => setTitle(select)} value={title} placeholder="Select an option"  /> */}
-                           <select name="lectureselect">
+                           <select name="lectureselect"  onChange={(e) => setTitle(e.target.value)}>
                            {
                                 lectures?.map((data) => (
-                                   <option value={data} onChange={(e) => setTitle(e.target.value)}>{data}</option>
+                                   <option value={data}>{data}</option>
                                 ))
                             }
                             {console.log(title)}

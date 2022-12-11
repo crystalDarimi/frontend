@@ -85,16 +85,16 @@ export default function Calendar(user) {
 
         //첫번째는 fullcalendar에 들어가는 lectureTitle을 title로 변경한 것입니다.
         //const thisEvents = state.eventlist;
-        addedCalendar.title = added.lectureTitle;
+        addedCalendar.title = added.title;
         addedCalendar.start = added.start;
         addedCalendar.end = added.end;
 
         //두번째는 post시에 들어갈 날짜는 백엔드에서 설정한 포멧으로 맞추는 코드입니다.
-        addedData.lectureTitle = added.lectureTitle;
-        addedData.start = moment(added.start).format("yyyy-MM-dd HH:mm");
-        addedData.end = moment(added.end).format("yyyy-MM-dd HH:mm");
+        addedData.lectureTitle = added.title;
+        addedData.start = moment(added.start).format("yyyy-MM-DD hh:mm");
+        addedData.end = moment(added.end).format("yyyy-MM-DD hh:mm");
 
-        onEventAdded(addedCalendar);   
+        onEventAdded(added);   
         addEventData(addedData);
         // addedevent.scheduleId = "ID-" + thisEvents.length;
         call("/eple/v1/calendar/schedule", "POST", addedData);
