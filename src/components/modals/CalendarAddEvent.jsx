@@ -3,46 +3,72 @@ import DatePicker from "react-datepicker";
 /* import Datetime from 'react-datetime'; */
 import "react-datepicker/dist/react-datepicker.css";
 import '../../styles/CalendarAddEvent.css'
+import Select from 'react-select'
 import Modal from 'react-modal';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import {call,signout} from "../../service/ApiService";
 
 
 export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAdded }/* { isOpen, onClose, onEventAdded } */) {
     const [title, setTitle] = useState("");
+    const [users, setUsers] = useState([]);
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
-    const [lectureTitle, setLectureTitle] = useState(""); // lectureList에서 선택된 lectureTitle
+    // //const [lectureTitle, setLectureTitle] = useState(""); // lectureList에서 선택된 lectureTitle
     const [lectureList, setLectureList] = useState([]); //string list 형태로 받아올 lectureTitle들..
+    const [lectures, setLectures] = useState([]);
     //const [users, setUsers] = useState([]);
     
 
-    //lecturelist 넣을 lecture들을 불러오기
-    useEffect(()=>{
-        loadLecture();
-    },[]);
+//     //lecturelist 넣을 lecture들을 불러오기
+//     useEffect(()=>{
+//         loadLecture();
+//     },[]);
 
-    const loadLecture =  async() => {
-        const result = await call("/eple/v1/mystudent/lecture"); //아마 이 부분에 그 lectureTitle url이 들어가면 될 것 같습니다!
-        setLectureList(result.data);
-        console.log(lectureTitle)
-    }
-    
+//     const loadLecture =  async() => {
+//         const lectures =  await call("/eple/v1/mystudent/lecture", "GET");
+//         setLectureList(lectures.data);
+//         console.log(lectureList);
+//  //아마 이 부분에 그 lectureTitle url이 들어가면 될 것 같습니다!
+//         // lectureList = lectures.data.map(lecture => (
+//         //     lecture.lectureTitle
+//         // ))
+//         // console.log(lectureList)
+//     }
+
+useEffect(()=>{
+    loadLecture();
+},[]);
+
+const loadLecture = async() => {
+    const result = await call("/eple/v1/mystudent/lecture", "GET");
+    console.log(result);
+    await setLectures(result.data.map((lecture) => (lecture.lectureTitle)));
+    console.log(lectures);
+    //titleList(await result.data);
+}
+async function titleList(data){
+    setLectureList(data);
+    console.log(await lectureList);
+    const list = await lectureList.map((lecture) => (lecture.lectureTitle));
+    console.log(await list);
+    setLectures(await list);
+    console.log(await lectures);   
+}
+
+
 
 
     //연동 전 dropbar에 들어가는 임시값입니다! 지우셔도 됩니다.
     const options = [
         'one', 'two', 'three'
     ]
-    const defaultOption = lectureList[0];
 
 
     const onSubmit = (event) => {
         event.preventDefault();
         onEventAdded({
             title,
-            lectureTitle,
             start,
             end,          
         })
@@ -54,13 +80,13 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
         <div className="addEvntBase">
 
             <Modal appElement={document.getElementById('app')} ariaHideApp={false} isOpen={isOpen} onRequestClose={onClose} className="addEvntModal">
-                {/*일정버튼은 잠시 주석처리 했습니다. */}
+                {/* 일정버튼은 잠시 주석처리 했습니다.
                 {!isLecture && <form onSubmit={onSubmit} className="addEvntForm">
 
                     <div className="addEvntFormInsider">
                         <div>
                             <label className="text eventTitle">일정 제목</label><br></br>
-                            <input className="UserInput inputTitle" placeholder="일정 제목" value={lectureTitle} name = "LecturTitle" onChange={(e) => setLectureTitle(e.target.value)} />
+                            <input className="UserInput inputTitle" placeholder="일정 제목" value={title} name = "LecturTitle" onChange={(e) => setTitle(e.target.value)} />
                         </div>
 
                         <div>
@@ -80,14 +106,22 @@ export default function CalendarAddEvent({ isLecture, isOpen, onClose, onEventAd
                     </div>
 
 
-                </form>}
+                </form>} */}
                 {isLecture && <form onSubmit={onSubmit} className="addEvntForm">
                     <div className="addEvntFormInsider">
                         <div>
                             <label className="text dropdown">과외 선택</label>
                             {/*<Dropdown className = "selectLecture" options={lectureList} onChange={(lecture) => setLectureTitle(lecture)} value={defaultOption} placeholder="Select an option"  /> */}
                             {/* 아래 임시를 지우고 이런식으로 {options}에 과외 리스트 값을 넣으면 될 것 같습니다.*/}
-                            <Dropdown className = "selectLecture" options={options} onChange={(lecture) => setLectureTitle(lecture)} value={defaultOption} placeholder="Select an option"  />
+                            {/* <Dropdown className = "selectLecture" options={lectures} onChange={(select) => setTitle(select)} value={title} placeholder="Select an option"  /> */}
+                           <select name="lectureselect">
+                           {
+                                lectures?.map((data) => (
+                                   <option value={data} onChange={(e) => setTitle(e.target.value)}>{data}</option>
+                                ))
+                            }
+                            {console.log(title)}
+                           </select>
                         </div>
                         {/* <div>
                             <label className="text eventTitle">과외 제목</label><br></br>

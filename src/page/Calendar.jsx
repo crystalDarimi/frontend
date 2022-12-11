@@ -34,6 +34,8 @@ export default function Calendar(user) {
     const calendarRef = useRef(null);
     const [modalOpen, setModalOpen ] = useState(false); 
     const [isLecture, setIsLecture] = useState(false);
+    const [lectureList, setLectureList] = useState([]); //string list 형태로 받아올 lectureTitle들..
+    const [lectures, setLectures] = useState([]);
     const [addedData, setAddedData] = useState({
         lectureTitle: "", //백엔드쪽에서 받는 객체 날짜 포멧을 맞춰서 저장할 것입니다!
         start:  "",
@@ -45,6 +47,25 @@ export default function Calendar(user) {
         end: "",
     });
 
+// useEffect(()=>{
+//     loadLecture();
+// },[]);
+
+// const loadLecture = async() => {
+//     const result = await call("/eple/v1/mystudent/lecture", "GET");
+//     console.log(result);
+//     await setLectureList(result.data);
+//     console.log(lectureList);
+//     await titleList();
+// }
+// async function titleList(){
+//     const list = lectureList.map((lecture) => (lecture.lectureTitle));
+//     console.log(list);
+//     setLectures(list);
+//     console.log(lectures);   
+// }
+
+    
 
     async function onEventAdded(added){
         let calendarApi = calendarRef.current.getApi();

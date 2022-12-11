@@ -36,14 +36,14 @@ const ChartTable = () => {
 
     }
 
-    useEffect(()=>{
-        loadInfo();
-    },[]);
+    // useEffect(()=>{
+    //     loadInfo();
+    // },[]);
 
-    const loadInfo =  async() => {
-        const result = await call("/eple/v1/myclass");
-        setInfo(result.data);
-    }
+    // const loadInfo =  async() => {
+    //     const result = await call("/eple/v1/myclass");
+    //     setInfo(result.data);
+    // }
 
     function showButton(){
         if(localStorage.getItem("role") === TEACHER){
@@ -72,7 +72,7 @@ const ChartTable = () => {
         ))
         lectureNum.current += 1;
         console.log()
-        await call("/eple/v1/calender/myclass", "POST", info);
+        await call("/eple/v1/myclass", "POST", info);
 
 
     }
